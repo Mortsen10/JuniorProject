@@ -23,9 +23,21 @@ private String name;
       
       HBox attribute = new HBox(15, atrName, label, plus, minus);
    }
+     
+   public int increment(int value){
+      value++;
+      return value;
+   }
    
-   //public HBox toLayout(){
-      //HBox attribute = new HBox(15, this.name, label, plus, minus);
-   //}
+   public int decrement(int value){
+      value--;
+      return value;
+   }
    
-}
+}//class
+
+/*   
+   public HBox toLayout(){
+      HBox attribute = new HBox(15, this.name, label, plus, minus);
+   }
+*/ 
