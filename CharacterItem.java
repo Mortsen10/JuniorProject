@@ -1,3 +1,5 @@
+/*
+
 import javafx.application.*;
 import javafx.stage.*;
 import javafx.scene.*;
@@ -5,20 +7,26 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.geometry.*;//Insets
 
-public class CharacterItem extends Application{
+public class CharacterItem{
 
-   @Override
-   public void start(Stage primaryStage) throws Exception{
+   public void secondScene(){
       
-      CheckBox shoes = new CheckBox("a shiny pair of red galoshes");//makes a label to the right
+      final ToggleGroup buttons = new ToggleGroup();
+      
+      RadioButton shoes = new RadioButton("a shiny pair of red galoshes");//makes a label to the right
+         shoes.setToggleGroup(buttons);
          GridPane.setConstraints(shoes, 0, 0);
-      CheckBox wHat = new CheckBox("a witch's hat, the edges are lightly frayed");
+      RadioButton wHat = new RadioButton("a witch's hat, the edges are lightly frayed");
+         wHat.setToggleGroup(buttons);
          GridPane.setConstraints(wHat, 0, 1);
-      CheckBox scarf = new CheckBox("a forest green scarf");
+      RadioButton scarf = new RadioButton("a forest green scarf");
+         scarf.setToggleGroup(buttons);
          GridPane.setConstraints(scarf, 0, 2);
-      CheckBox sHat = new CheckBox("a safari hat");
+      RadioButton sHat = new RadioButton("a safari hat");
+         sHat.setToggleGroup(buttons);
          GridPane.setConstraints(sHat, 0, 3);
-      CheckBox hands = new CheckBox("nothing. i only need my bare hands");
+      RadioButton hands = new RadioButton("nothing. i only need my bare hands");
+         hands.setToggleGroup(buttons);
          GridPane.setConstraints(hands, 0, 4);
       
       Button submit = new Button("submit");
@@ -39,3 +47,5 @@ public class CharacterItem extends Application{
    }//main
 
 }//class
+
+*/
