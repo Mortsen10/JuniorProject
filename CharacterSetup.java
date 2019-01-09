@@ -3,7 +3,7 @@ import javafx.stage.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.geometry.*;//Insets
+import javafx.geometry.*;
 
 public class CharacterSetup extends Application{
 
@@ -29,13 +29,13 @@ public class CharacterSetup extends Application{
       
       GridPane grid = new GridPane();
       grid.setPadding(new Insets(10, 10, 10, 10));
-      grid.setVgap(15);
-      grid.setHgap(10);
+      grid.setVgap(20);
+      //grid.setHgap(15);
       
-      Label out = new Label("welcome. select your character attributes. but be careful,\nthese cannot be changed later on.");
+      Label out = new Label("welcome. select your character attributes. but be careful,\nas these cannot be changed later on.");
       GridPane.setConstraints(out, 0, 0);
       
-      Label name = new Label("name:");
+      Label name = new Label("name your character:");
       TextField nameIn = new TextField();//lets users type an input
       nameIn.setPromptText("sasha");//default text (will be greyed out)
       HBox naming = new HBox(5);
@@ -45,10 +45,16 @@ public class CharacterSetup extends Application{
       //make attribute Nodes
       GridPane.setConstraints(strength, 0, 2);
       
+      Label distPoints = new Label("10");
+      Label labelPoints = new Label("distributable points:");
+      HBox points = new HBox(5);
+      points.getChildren().addAll(labelPoints, distPoints);
+      GridPane.setConstraints(points, 0, 6);
+      
       Button submit = new Button("submit");
       GridPane.setConstraints(submit, 0, 7);
       
-      grid.getChildren().addAll(out, naming, strength, submit);
+      grid.getChildren().addAll(out, naming, strength, points, submit);
       
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       
