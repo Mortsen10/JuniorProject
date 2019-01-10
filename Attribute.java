@@ -3,8 +3,14 @@ import javafx.stage.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.beans.binding.*;
 
-public class Attribute extends HBox{
+public class Attribute{
+   
+   private final HBox box;
+   private final Button plus, minus;
+   private final Label label;
+   private final IntValue value;
    
    private static Label atrName(String name){
       Label atrName = new Label(name);
@@ -30,19 +36,24 @@ public class Attribute extends HBox{
       return minus;
    }
 
-   public Attribute(String name){///////////////////////////////constructor
-      super(15, atrName(name), label(), plus(), minus());
+   public Attribute(String name){/////////////////////////////// constructor
+      
+      plus = plus();
+      minus = minus();
+      label = label();
+      value = new IntValue(name);
+      
+      box = new HBox(15, atrName(name), label, plus, minus);
+      
+      plus.setOnAction(e -> value.increment());
+      minus.setOnAction(e -> value.decrement());
+      
+      label.textProperty()/*property is a wrapper and notifys when changed*/.bind(Bindings.convert/*converts Int to String*/(value.getProperty()));
    }
    
    
-   public int increment(int value){
-      value++;
-      return value;
+   public HBox getBox(){
+      return this.box;
    }
-   
-   public int decrement(int value){
-      value--;
-      return value;
-   }
-   
+
 }//class

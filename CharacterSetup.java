@@ -17,26 +17,25 @@ public class CharacterSetup extends Application{
       Label out = new Label("welcome. select your character attributes. but be careful,\nas these cannot be changed later on.");
       GridPane.setConstraints(out, 0, 0);
       
-      Label name = new Label("name your character:");
+      Label name = new Label("name your character:");///////////////////// name input
       TextField nameIn = new TextField();//lets users type an input
       nameIn.setPromptText("sasha");//default text (will be greyed out)
       HBox naming = new HBox(5);
       naming.getChildren().addAll(name, nameIn);
       GridPane.setConstraints(naming, 0, 1);
       
-      ////////////////////////////////////////////////////////////////////////////////make attribute Nodes
-      Attribute strength = new Attribute("strength");
-         GridPane.setConstraints(strength, 0, 2);
+      Attribute strength = new Attribute("strength");/////////////////// attributes
+         GridPane.setConstraints(strength.getBox(), 0, 2);
       Attribute cunning = new Attribute("cunning");
-         GridPane.setConstraints(cunning, 0, 3);
+         GridPane.setConstraints(cunning.getBox(), 0, 3);
       Attribute luck = new Attribute("luck");
-         GridPane.setConstraints(luck, 0, 4);
+         GridPane.setConstraints(luck.getBox(), 0, 4);
       Attribute speed = new Attribute("speed");
-         GridPane.setConstraints(speed, 0, 5);
+         GridPane.setConstraints(speed.getBox(), 0, 5);
       Attribute memory = new Attribute("memory");
-         GridPane.setConstraints(memory, 0, 6);
+         GridPane.setConstraints(memory.getBox(), 0, 6);
       
-      Label distPoints = new Label("10");
+      Label distPoints = new Label("10");/////////////////////////points
       Label labelPoints = new Label("distributable points:");
       HBox points = new HBox(5);
       points.getChildren().addAll(labelPoints, distPoints);
@@ -45,18 +44,15 @@ public class CharacterSetup extends Application{
       Button submit = new Button("submit");
       GridPane.setConstraints(submit, 0, 8);
       
-      grid.getChildren().addAll(out, naming, strength, cunning, luck, speed, memory, points, submit);
+      grid.getChildren().addAll(out, naming, strength.getBox(), cunning.getBox(), luck.getBox(), speed.getBox(), memory.getBox(), points, submit);
       
       Scene scene = new Scene(grid, 320, 420);
       
       primaryStage.setScene(scene);
       primaryStage.setTitle("Title of Game");
       primaryStage.show();
-/*    
-      plus.setOnAction(e -> label.setText("plus"));
-      minus.setOnAction(e -> label.setText("minus"));
-*/    
-      submit.setOnAction(e -> {
+          
+      submit.setOnAction(e -> {/////////////// scene switch
          secondScene();
          primaryStage.hide();
        }); // switch to next scene
