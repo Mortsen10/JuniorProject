@@ -11,6 +11,7 @@ public class Attribute{
    private final Button plus, minus;
    private final Label label;
    private final IntValue value;
+ //private final DistPtsValue dpValue;
    
    private static Label atrName(String name){
       Label atrName = new Label(name);
@@ -36,19 +37,26 @@ public class Attribute{
       return minus;
    }
 
-   public Attribute(String name){/////////////////////////////// constructor
+   public Attribute(String name){///////////////////////////////////////////////////////////// constructor
       
       plus = plus();
       minus = minus();
       label = label();
       value = new IntValue(name);
+    //dpValue = new DistPtsValue();
       
       box = new HBox(15, atrName(name), label, plus, minus);
       
-      plus.setOnAction(e -> value.increment());
-      minus.setOnAction(e -> value.decrement());
+      plus.setOnAction(e -> {
+         value.increment();
+       //dpValue.decrement();
+      });
+      minus.setOnAction(e -> {
+         value.decrement();
+       //dpValue.increment();
+      });
       
-      label.textProperty()/*property is a wrapper and notifys when changed*/.bind(Bindings.convert/*converts Int to String*/(value.getProperty()));
+      label.textProperty()/*property is a wrapper and notifys when changed*/.bind(Bindings.convert/*converts Int to String*/(value.getAtrProperty()));
    }
    
    

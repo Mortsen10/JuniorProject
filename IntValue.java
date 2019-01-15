@@ -2,27 +2,30 @@ import javafx.beans.property.*;
 
 public class IntValue{
 
-   private int   value;
+   private int   atrValue;
    private final String name;
-   private final SimpleIntegerProperty prop;
+   private final SimpleIntegerProperty atrPtsLabel;
    
-   public IntValue(String name){
+   public IntValue(String name){//constructor
       this.name = name;
-      this.prop = new SimpleIntegerProperty();
+      this.atrPtsLabel = new SimpleIntegerProperty();
    }
 
    public void increment(){
-      this.value++;
-      this.prop.set(this.value);
+      this.atrValue++;
+      this.atrPtsLabel.set(this.atrValue);
+      //distPts.increment();
    }
    
    public void decrement(){
-      this.value--;
-      this.prop.set(this.value);
+      this.atrValue--;
+      this.atrPtsLabel.set(this.atrValue);
+      //distPts.decrement();
+      
    }
    
-   public SimpleIntegerProperty getProperty(){
-      return prop;
+   public SimpleIntegerProperty getAtrProperty(){
+      return atrPtsLabel;
    }
 
 }//class

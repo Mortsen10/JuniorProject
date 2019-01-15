@@ -6,6 +6,7 @@ import javafx.scene.layout.*;
 
 public class CharacterStats{
    
-
-
+   //Array array = new Array[5];
+   
+   
 }

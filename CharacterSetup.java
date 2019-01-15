@@ -35,8 +35,9 @@ public class CharacterSetup extends Application{
       Attribute memory = new Attribute("memory");
          GridPane.setConstraints(memory.getBox(), 0, 6);
       
-      Label distPoints = new Label("10");/////////////////////////points
-      Label labelPoints = new Label("distributable points:");
+      Label labelPoints = new Label("distributable points:");/////////// points
+      Label distPoints = new Label("10"); 
+      //DistPtsValue distPts = new DistPtsValue();
       HBox points = new HBox(5);
       points.getChildren().addAll(labelPoints, distPoints);
       GridPane.setConstraints(points, 0, 7);
@@ -51,7 +52,7 @@ public class CharacterSetup extends Application{
       primaryStage.setScene(scene);
       primaryStage.setTitle("Title of Game");
       primaryStage.show();
-          
+      
       submit.setOnAction(e -> {/////////////// scene switch
          secondScene();
          primaryStage.hide();
@@ -96,7 +97,56 @@ public class CharacterSetup extends Application{
       secondStage.setScene(scene);
       secondStage.setTitle("Title of Game");
       secondStage.show();
+      
+      submit.setOnAction(e -> {
+         mainScreen();
+         secondStage.hide();
+      });
 
+   }
+   
+   public void mainScreen(){
+      
+      GridPane grid = new GridPane();
+      grid.setVgap(15);
+      grid.setHgap(20);
+      grid.setPadding(new Insets(10, 10, 10, 10));
+      
+      Button explore = new Button("EXPLORE");
+         GridPane.setConstraints(explore, 2, 3);
+         explore.setPrefSize(210, 15);
+      Button stats = new Button("stats");
+         stats.setPrefSize(90, 15);
+      Button items = new Button("items");
+         items.setPrefSize(90, 15);
+      Button backpack = new Button("backpack");
+         backpack.setPrefSize(90, 15);
+      
+      HBox btns1 = new HBox(30);
+         GridPane.setConstraints(btns1, 2, 4);
+         btns1.getChildren().addAll(stats, backpack);
+      HBox btns2 = new HBox();
+         GridPane.setConstraints(btns2, 2, 5);
+         btns2.getChildren().addAll(items);
+      
+      grid.getChildren().addAll(explore, btns1, btns2);
+      
+/*    
+**    Label out = new Label("welcome");
+**      
+**    BorderPane pane = new BorderPane();
+**    pane.setCenter(grid);
+**    pane.setBottom(out);
+*/
+
+      Scene scene = new Scene(grid, 320, 420);
+      
+      Stage mainStage = new Stage();
+      mainStage.setScene(scene);
+      mainStage.setTitle("Title of Game");
+      mainStage.show();
+      
+      /////////////////////////////////////////////////////////////explore.setOnAction(e -> );
    }
    
 }//class
