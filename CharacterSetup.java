@@ -24,28 +24,26 @@ public class CharacterSetup extends Application{
       naming.getChildren().addAll(name, nameIn);
       GridPane.setConstraints(naming, 0, 1);
       
-      Attribute strength = new Attribute("strength");/////////////////// attributes
+      
+      Attribute points = new Attribute("Points:", null);///////////////////////..............
+      GridPane.setConstraints(points.getBox(), 0, 7);
+      
+      Attribute strength = new Attribute("strength", points.getValue());/////////////////// attributes
          GridPane.setConstraints(strength.getBox(), 0, 2);
-      Attribute cunning = new Attribute("cunning");
+      Attribute cunning = new Attribute("cunning", points.getValue());
          GridPane.setConstraints(cunning.getBox(), 0, 3);
-      Attribute luck = new Attribute("luck");
+      Attribute luck = new Attribute("luck", points.getValue());
          GridPane.setConstraints(luck.getBox(), 0, 4);
-      Attribute speed = new Attribute("speed");
+      Attribute speed = new Attribute("speed", points.getValue());
          GridPane.setConstraints(speed.getBox(), 0, 5);
-      Attribute memory = new Attribute("memory");
+      Attribute memory = new Attribute("memory", points.getValue());
          GridPane.setConstraints(memory.getBox(), 0, 6);
       
-      Label labelPoints = new Label("distributable points:");/////////// points
-      Label distPoints = new Label("10"); 
-      //DistPtsValue distPts = new DistPtsValue();
-      HBox points = new HBox(5);
-      points.getChildren().addAll(labelPoints, distPoints);
-      GridPane.setConstraints(points, 0, 7);
       
       Button submit = new Button("submit");
       GridPane.setConstraints(submit, 0, 8);
       
-      grid.getChildren().addAll(out, naming, strength.getBox(), cunning.getBox(), luck.getBox(), speed.getBox(), memory.getBox(), points, submit);
+      grid.getChildren().addAll(out, naming, strength.getBox(), cunning.getBox(), luck.getBox(), speed.getBox(), memory.getBox(), points.getBox(), submit);
       
       Scene scene = new Scene(grid, 320, 420);
       
@@ -145,8 +143,16 @@ public class CharacterSetup extends Application{
       mainStage.setScene(scene);
       mainStage.setTitle("Title of Game");
       mainStage.show();
+/*
+      explore.setOnAction(e -> map());
+      stats.setOnAction(e -> stats());
+      backpack.setOnAction(e -> backpack());
+      items.setOnAction(e -> items());
+*/
+   }
+   
+   public void map(){
       
-      /////////////////////////////////////////////////////////////explore.setOnAction(e -> );
    }
    
 }//class
