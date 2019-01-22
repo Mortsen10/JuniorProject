@@ -32,8 +32,7 @@ public class Attribute{
       
       //binds value to label
       label.textProperty()/*property is a wrapper and notifys when changed*/.bind(Bindings.convert/*converts Int to String*/(value.getAtrProperty()));
-      
-   }//constructor
+   }
    
    
    //create nodes
@@ -66,8 +65,12 @@ public class Attribute{
       return this.box;
    }
    
-   public IntValue getValue(){
+   public IntValue getParent(){
       return this.value;
+   }
+   
+   public int getValue(){
+      return value.getValue();
    }
 
 }//class

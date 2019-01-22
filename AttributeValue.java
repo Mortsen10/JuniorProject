@@ -26,7 +26,7 @@ public class AttributeValue implements IntValue{
    
    public boolean increment(){
       if (this.parent == null || this.parent.decrement()){//decrementing the parent (10 distPts), not the actual value
-         this.atrValue++;
+         this.atrValue+=10;
          this.atrPtsLabel.set(this.atrValue);
          return true;
       }else{
@@ -36,7 +36,7 @@ public class AttributeValue implements IntValue{
    
    public boolean decrement(){
       if (this.atrValue > 0 && (this.parent == null || this.parent.increment())){
-         this.atrValue--;
+         this.atrValue-=10;
          this.atrPtsLabel.set(this.atrValue);
          return true;
       }else{
@@ -47,5 +47,15 @@ public class AttributeValue implements IntValue{
    public SimpleIntegerProperty getAtrProperty(){
       return atrPtsLabel;
    }
+   
+///////////////////////////////////////////////////////////
+   public int getValue(){
+      return atrValue;
+   }
+   
+   public IntValue getParent(){
+      return parent;
+   }
+//////////////////////////////////////////////////////////
 
 }//class

@@ -30,19 +30,19 @@ public class CharacterSetup extends Application{
       GridPane.setConstraints(naming, 0, 1);
       
       //distributable points
-      Attribute points = new Attribute("Tokens:", null, 10);
+      Attribute points = new Attribute("Tokens:", null, 100);
       GridPane.setConstraints(points.getBox(), 0, 7);
       
       //attributes
-      Attribute strength = new Attribute("strength", points.getValue(), 0);
+      Attribute strength = new Attribute("strength", points.getParent(), 0);
          GridPane.setConstraints(strength.getBox(), 0, 2);
-      Attribute cunning = new Attribute("cunning", points.getValue(), 0);
+      Attribute cunning = new Attribute("cunning", points.getParent(), 0);
          GridPane.setConstraints(cunning.getBox(), 0, 3);
-      Attribute luck = new Attribute("luck", points.getValue(), 0);
+      Attribute luck = new Attribute("luck", points.getParent(), 0);
          GridPane.setConstraints(luck.getBox(), 0, 4);
-      Attribute speed = new Attribute("speed", points.getValue(), 0);
+      Attribute speed = new Attribute("speed", points.getParent(), 0);
          GridPane.setConstraints(speed.getBox(), 0, 5);
-      Attribute memory = new Attribute("memory", points.getValue(), 0);
+      Attribute memory = new Attribute("memory", points.getParent(), 0);
          GridPane.setConstraints(memory.getBox(), 0, 6);
       
       //next screen button
@@ -64,17 +64,24 @@ public class CharacterSetup extends Application{
       primaryStage.setTitle("Title of Game");
       primaryStage.show();
       
-    //button actions
+      //button actions
       submitBtn.setOnAction(e -> {
-         secondScene();
-         primaryStage.hide();
-       }); 
+      
+         //if (nameIn == null){ //no name
+         //if (tokens.getValue() != 0){ //not all tokens used
+         
+         //if ((nameIn != null) && (points.getValue == 0)){//everything is filled out
+            CharacterStats stats = new CharacterStats(strength.getValue(), cunning.getValue(), luck.getValue(), speed.getValue(), memory.getValue());
+            secondScene(stats);
+            primaryStage.hide();
+         //}//if
+      });
       
    }//main
    
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-   public void secondScene(){
+   public void secondScene(CharacterStats stats){
       
       //buttons
       final ToggleGroup buttons = new ToggleGroup();
@@ -114,22 +121,44 @@ public class CharacterSetup extends Application{
       
       //button actions
       submit.setOnAction(e -> {
-         mainScreen();
-         secondStage.hide();
+         if (buttons.getSelectedToggle() != null){
+               if (buttons.getSelectedToggle() == shoes){
+                  stats.incrementStats(2, 10, 3, 5);
+                  //stats.equipItem(____);
+               }else if (buttons.getSelectedToggle() == wHat){
+                  stats.incrementStats(1, 10, 0, 5);
+                  //stats.equipItem(____);
+               }else if (buttons.getSelectedToggle() == scarf){
+                  stats.incrementStats(4, 10, 1, 5);
+                  //stats.equipItem(____);
+               }else if (buttons.getSelectedToggle() == sHat){
+                  stats.incrementStats(3, 10, 4, 5);
+                  //stats.equipItem(____);
+               }else if (buttons.getSelectedToggle() == hands){
+                  stats.incrementStats(0, 15, 0, 0);
+                  //stats.equipItem(____);
+               }else{
+                  System.out.println("hello wayward traveler. how did you get all the way down here?");
+               }
+            mainScreen(stats);
+            secondStage.hide();
+         //}else{
+            //window pops up, "every adventurer needs a signaure look"
+         }//if
       });
-
+      
    }//second screen
    
-   
-   
-   public void mainScreen(){
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  
+   public void mainScreen(CharacterStats stats){
       
       //buttons
       Button explore = new Button("EXPLORE");
          GridPane.setConstraints(explore, 2, 3);
          explore.setPrefSize(210, 15);
-      Button stats = new Button("stats");
-         stats.setPrefSize(90, 15);
+      Button statsBtn = new Button("stats");
+         statsBtn.setPrefSize(90, 15);
       Button items = new Button("items");
          items.setPrefSize(90, 15);
       Button backpack = new Button("backpack");
@@ -138,16 +167,10 @@ public class CharacterSetup extends Application{
       //stack buttons
       HBox btns1 = new HBox(30);
          GridPane.setConstraints(btns1, 2, 4);
-         btns1.getChildren().addAll(stats, backpack);
+         btns1.getChildren().addAll(statsBtn, backpack);
       HBox btns2 = new HBox();
          GridPane.setConstraints(btns2, 2, 5);
          btns2.getChildren().addAll(items);
-      
-/*    Label out = new Label("welcome");
-**      
-**    BorderPane pane = new BorderPane();
-**    pane.setCenter(grid);
-**    pane.setBottom(out);  */
 
       //grid setup
       GridPane grid = new GridPane();
@@ -163,21 +186,22 @@ public class CharacterSetup extends Application{
       mainStage.setTitle("Title of Game");
       mainStage.show();
       
-/*    //button actions
-      explore.setOnAction(e -> map());
-      stats.setOnAction(e -> stats());
-      backpack.setOnAction(e -> backpack());
-      items.setOnAction(e -> items()); */
+      //button actions
+      //explore.setOnAction(e -> map());
+      //stats.setOnAction(e -> stats(stats));/////////////////////////////////////
+      //backpack.setOnAction(e -> backpack());
+      //items.setOnAction(e -> items());
 
    }//main screen
    
    
-   
-/*
-   public void stats(){
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  // public void stats(CharacterStats stats){
       
-   }//stats
+  // }//stats
    
+/*   
    public void backpack(){
       
    }//backpack
@@ -189,9 +213,7 @@ public class CharacterSetup extends Application{
    public void map(){
       
    }//map
+  
 */
-   
-   
-   
-   
+
 }//class
