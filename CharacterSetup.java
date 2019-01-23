@@ -188,18 +188,73 @@ public class CharacterSetup extends Application{
       
       //button actions
       //explore.setOnAction(e -> map());
-      //stats.setOnAction(e -> stats(stats));/////////////////////////////////////
+      statsBtn.setOnAction(e -> {
+         stats(stats);
+         mainStage.hide();
+      });
       //backpack.setOnAction(e -> backpack());
       //items.setOnAction(e -> items());
 
    }//main screen
    
-   
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  // public void stats(CharacterStats stats){
+  public void stats(CharacterStats stats){
       
-  // }//stats
+      //grid setup
+      GridPane grid = new GridPane();
+      grid.setVgap(10);
+      grid.setPadding(new Insets(10, 10, 10, 10));
+            
+      //top bar
+      Button back = new Button("<back");
+      Label label = new Label("stats");
+      HBox top = new HBox(85);
+      top.getChildren().addAll(back, label);
+      GridPane.setConstraints(top, 0, 0);
+      
+      //name
+      Label name = new Label("name: "/*take name and convert to ruins*/);
+      GridPane.setConstraints(name, 0, 2);
+      
+      //attributes //-----------------------------------------------------------------set as observable, chages as stats change
+      AttributeStat strength = new AttributeStat("strength:");
+         GridPane.setConstraints(strength.getBox(), 0, 4);
+      AttributeStat cunning = new AttributeStat("cunning:");
+         GridPane.setConstraints(cunning.getBox(), 0, 5);
+      AttributeStat luck = new AttributeStat("luck:");
+         GridPane.setConstraints(luck.getBox(), 0, 6);
+      AttributeStat speed = new AttributeStat("speed:");
+         GridPane.setConstraints(speed.getBox(), 0, 7);
+      AttributeStat memory = new AttributeStat("memory:");
+         GridPane.setConstraints(memory.getBox(), 0, 8);
+         
+            //values
+      
+      //equiped items
+      
+      //money
+      Label coin = new Label("coin pouch:");
+      Label coinValue = new Label("" + 0);
+      HBox coins = new HBox(10);
+      coins.getChildren().addAll(coin, coinValue);
+      GridPane.setConstraints(coins, 0, 15);
+      
+      //window setup
+      grid.getChildren().addAll(top, name, strength.getBox(), cunning.getBox(), luck.getBox(), speed.getBox(), memory.getBox(), coins);
+      Scene scene = new Scene(grid, 320, 420);
+      Stage statsStage = new Stage();
+      statsStage.setScene(scene);
+      statsStage.setTitle("Title of Game");
+      statsStage.show();
+      
+      //button actions
+      back.setOnAction(e -> {
+         mainScreen(stats);
+         statsStage.hide();
+      });
+      
+  }//stats
    
 /*   
    public void backpack(){
@@ -217,3 +272,28 @@ public class CharacterSetup extends Application{
 */
 
 }//class
+
+/*Label strength = new Label("strength:");
+         GridPane.setConstraints();
+      Label val0 = new Label(""+ stats.getStats(0));
+         GridPane.setConstraints(val0, 0, 2);
+      
+      Label cunning = new Label("cunning:");
+         GridPane.setConstraints();
+      Label val1 = new Label(""+ stats.getStats(1));
+         GridPane.setConstraints(val1, 0, 3);
+         
+      Label luck = new Label("luck:");
+         GridPane.setConstraints();
+      Label val2 = new Label(""+ stats.getStats(2));
+         GridPane.setConstraints(val2, 0, 4);
+         
+      Label speed = new Label("speed:");
+         GridPane.setConstraints();
+      Label val3 = new Label(""+ stats.getStats(3));
+         GridPane.setConstraints(val3, 0, 5);
+         
+      Label memory = new Label("memory:");
+         GridPane.setConstraints();
+      Label val4 = new Label(""+ stats.getStats(4));
+         GridPane.setConstraints(val4, 0, 6);*/

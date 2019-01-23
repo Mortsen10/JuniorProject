@@ -43,7 +43,7 @@ public class Attribute{
    }
    
    private static Label label(int startValue){
-      Label label = new Label("" + startValue); ////////////////////////////////////////////////////// need tokens to display 10 at start, not zero
+      Label label = new Label("" + startValue);
       label.setPrefSize(30, 20);
       return label;
    }
