@@ -7,15 +7,8 @@ public class AttributeValue implements IntValue{
    private final SimpleIntegerProperty atrPtsLabel;
    private final IntValue              parent;
    
-/* //constructor
-   public AttributeValue(String name, IntValue parent){
-      this.name = name;
-      this.atrPtsLabel = new SimpleIntegerProperty();
-      this.parent = parent;
-   } */
-   
    //constructor
-   public AttributeValue(String name, IntValue parent, int startValue){//////////////// only using this constructor? 
+   public AttributeValue(String name, IntValue parent, int startValue){
       this.name = name;
       this.atrPtsLabel = new SimpleIntegerProperty();
       this.parent = parent;
@@ -48,7 +41,7 @@ public class AttributeValue implements IntValue{
       return atrPtsLabel;
    }
    
-///////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
    public int getValue(){
       return atrValue;
    }

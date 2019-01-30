@@ -13,6 +13,15 @@ import javafx.geometry.*;
 
 public class CharacterSetup extends Application{
 
+/*
+   private final SimpleIntegerProperty strength;
+   private final SimpleIntegerProperty cunning;
+   private final SimpleIntegerProperty luck;
+   private final SimpleIntegerProperty speed;
+   private final SimpleIntegerProperty memory;
+
+*/
+
    @Override
    public void start(Stage primaryStage) throws Exception{
       
@@ -189,7 +198,7 @@ public class CharacterSetup extends Application{
       //button actions
       //explore.setOnAction(e -> map());
       statsBtn.setOnAction(e -> {
-         stats(stats);
+         stat(stats);
          mainStage.hide();
       });
       //backpack.setOnAction(e -> backpack());
@@ -199,7 +208,7 @@ public class CharacterSetup extends Application{
    
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  public void stats(CharacterStats stats){
+  public void stat(CharacterStats stats){
       
       //grid setup
       GridPane grid = new GridPane();
@@ -217,21 +226,17 @@ public class CharacterSetup extends Application{
       Label name = new Label("name: "/*take name and convert to ruins*/);
       GridPane.setConstraints(name, 0, 2);
       
-      //attributes //-----------------------------------------------------------------set as observable, chages as stats change
-      AttributeStat strength = new AttributeStat("strength:");
+      //attributes
+      Attribute strength = new Attribute("strength:", null, stats.getValue(0));
          GridPane.setConstraints(strength.getBox(), 0, 4);
-      AttributeStat cunning = new AttributeStat("cunning:");
+      Attribute cunning = new Attribute("cunning:", null, stats.getValue(1));
          GridPane.setConstraints(cunning.getBox(), 0, 5);
-      AttributeStat luck = new AttributeStat("luck:");
+      Attribute luck = new Attribute("luck:", null, stats.getValue(2));
          GridPane.setConstraints(luck.getBox(), 0, 6);
-      AttributeStat speed = new AttributeStat("speed:");
+      Attribute speed = new Attribute("speed:", null, stats.getValue(3));
          GridPane.setConstraints(speed.getBox(), 0, 7);
-      AttributeStat memory = new AttributeStat("memory:");
-         GridPane.setConstraints(memory.getBox(), 0, 8);
-         
-            //values
-      
-      //equiped items
+      Attribute memory = new Attribute("memory:", null, stats.getValue(4));
+         GridPane.setConstraints(memory.getBox(), 0, 8);    
       
       //money
       Label coin = new Label("coin pouch:");
@@ -253,6 +258,11 @@ public class CharacterSetup extends Application{
          mainScreen(stats);
          statsStage.hide();
       });
+      
+      //binding 
+      /*
+         label.textProperty().bind(Bindings.convert(value.getAtrProperty()));
+      */
       
   }//stats
    
