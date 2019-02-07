@@ -13,14 +13,6 @@ import javafx.geometry.*;
 
 public class CharacterSetup extends Application{
 
-/*
-   private final SimpleIntegerProperty strength;
-   private final SimpleIntegerProperty cunning;
-   private final SimpleIntegerProperty luck;
-   private final SimpleIntegerProperty speed;
-   private final SimpleIntegerProperty memory;
-
-*/
 
    @Override
    public void start(Stage primaryStage) throws Exception{
@@ -75,21 +67,22 @@ public class CharacterSetup extends Application{
       
       //button actions
       submitBtn.setOnAction(e -> {
-      
-         //if (nameIn == null){ //no name
-         //if (tokens.getValue() != 0){ //not all tokens used
+         if ((nameIn.getText() == null) || (nameIn.getText().isEmpty())){ //no name
+            PopUpWindow nameRemind = new PopUpWindow("even the bravest of\nadventurers needs a name?", "continue");
+         }else if (points.getValue() != 0){ //not all tokens used
+            PopUpWindow tokensRemind = new PopUpWindow("continue? and leave\nmoney unspent?", "spend");
+         }
          
-         //if ((nameIn != null) && (points.getValue == 0)){//everything is filled out
+       if ((nameIn != null) && (points.getValue() == 0)){//everything is filled out
             CharacterStats stats = new CharacterStats(strength.getValue(), cunning.getValue(), luck.getValue(), speed.getValue(), memory.getValue());
             secondScene(stats);
             primaryStage.hide();
-         //}//if
+         }
       });
-      
+   
    }//main
    
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+   
    public void secondScene(CharacterStats stats){
       
       //buttons
@@ -151,9 +144,9 @@ public class CharacterSetup extends Application{
                }
             mainScreen(stats);
             secondStage.hide();
-         //}else{
-            //window pops up, "every adventurer needs a signaure look"
-         }//if
+         }else{
+            PopUpWindow itemRemind = new PopUpWindow("every adventurer needs a signaure look", "continue");
+         }
       });
       
    }//second screen
