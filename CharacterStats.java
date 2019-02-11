@@ -6,7 +6,7 @@ import javafx.scene.layout.*;
 
 public class CharacterStats{
    
-   public int[] stats = new int [5]; //tried to make it an array of SimpleIntegerProperty 's
+   public int[] stats = new int [5];
    String item;
    
    //constructor
@@ -17,6 +17,9 @@ public class CharacterStats{
       stats[2] = luck;
       stats[3] = speed;
       stats[4] = memory;
+      //name
+      //money
+      //array of three equipable items
    }
    
    
@@ -33,14 +36,8 @@ public class CharacterStats{
       stats[atr2] += value2;
    }
    
-   
-/* public HBox getBox(SimpleIntegerProperty atr){
-      
-      return box;
-   } 
-   
    public void equipItem(){
       
-   } */
+   }
    
 }

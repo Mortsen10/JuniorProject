@@ -17,15 +17,17 @@ public class CharacterSetup extends Application{
    @Override
    public void start(Stage primaryStage) throws Exception{
       
-      // instead of a label, I want to be able to 
-      //show and hide text somewhere on the screen
+      // instead of a label, I want a scrolable
+      // text thing at the bottom. i want this 
+      // to be seen throught the game (except
+      // in the map)
       Label out = new Label("welcome. select your character attributes. but be careful,\nas these cannot be changed later on.");
       GridPane.setConstraints(out, 0, 0);
       
       //name input
       Label name = new Label("what should we call you?");
       TextField nameIn = new TextField();//lets users type an input
-      nameIn.setPromptText("sasha");//default text (will be greyed out)
+      nameIn.setPromptText("name");//default text (will be greyed out)
       HBox naming = new HBox(5);
       naming.getChildren().addAll(name, nameIn);
       GridPane.setConstraints(naming, 0, 1);
@@ -62,24 +64,35 @@ public class CharacterSetup extends Application{
       //window setup
       Scene scene = new Scene(grid, 320, 420);
       primaryStage.setScene(scene);
+      primaryStage.setResizable(false);
       primaryStage.setTitle("Title of Game");
       primaryStage.show();
       
       //button actions
+         //int final notSpent = 0;
       submitBtn.setOnAction(e -> {
          if ((nameIn.getText() == null) || (nameIn.getText().isEmpty())){ //no name
-            PopUpWindow nameRemind = new PopUpWindow("even the bravest of\nadventurers needs a name?", "continue");
+            PopUpWindow nameRemind = new PopUpWindow("even the bravest of\nadventurers needs a name", "continue");
          }else if (points.getValue() != 0){ //not all tokens used
-            PopUpWindow tokensRemind = new PopUpWindow("continue? and leave\nmoney unspent?", "spend");
+            //if (notSpent <= 1){
+               //notSpent++;
+               PopUpWindow tokensRemind = new PopUpWindow("continue? and leave\nmoney unspent?", "spend");
+            //}
+            /*else if (notSpent == 2){
+               notSpent++;
+               PopUpWindow tokensRemind2 = new PopUpWindow(_____); //-------------------------------------------------------------------------------
+            }else if (notSpent >= 3){
+               notSpent++;
+               PopUpWindow tokensRemind3 = new PopUpWindow(_____); //-------------------------------------------------------------------------------
+            }*/
          }
-         
        if ((nameIn != null) && (points.getValue() == 0)){//everything is filled out
             CharacterStats stats = new CharacterStats(strength.getValue(), cunning.getValue(), luck.getValue(), speed.getValue(), memory.getValue());
             secondScene(stats);
             primaryStage.hide();
          }
       });
-   
+      
    }//main
    
    
@@ -118,6 +131,7 @@ public class CharacterSetup extends Application{
       Scene scene = new Scene(layout, 320, 420);
       Stage secondStage = new Stage();
       secondStage.setScene(scene);
+      secondStage.setResizable(false);
       secondStage.setTitle("Title of Game");
       secondStage.show();
       
@@ -126,9 +140,9 @@ public class CharacterSetup extends Application{
          if (buttons.getSelectedToggle() != null){
                if (buttons.getSelectedToggle() == shoes){
                   stats.incrementStats(2, 10, 3, 5);
-                  //stats.equipItem(____);
-               }else if (buttons.getSelectedToggle() == wHat){
-                  stats.incrementStats(1, 10, 0, 5);
+                  //stats.equipItem(____); //---------------------------------------------------- i want the player to be notified that they got extra 
+               }else if (buttons.getSelectedToggle() == wHat){ //-------------------------------- attribute points on the next screen in the text window
+                  stats.incrementStats(1, 10, 0, 5); //------------------------------------------ thing. ex: +10 speed, +5 cunning (name of object)
                   //stats.equipItem(____);
                }else if (buttons.getSelectedToggle() == scarf){
                   stats.incrementStats(4, 10, 1, 5);
@@ -185,6 +199,7 @@ public class CharacterSetup extends Application{
       Scene scene = new Scene(grid, 320, 420);
       Stage mainStage = new Stage();
       mainStage.setScene(scene);
+      mainStage.setResizable(false);
       mainStage.setTitle("Title of Game");
       mainStage.show();
       
@@ -242,6 +257,7 @@ public class CharacterSetup extends Application{
       grid.getChildren().addAll(top, name, strength.getBox(), cunning.getBox(), luck.getBox(), speed.getBox(), memory.getBox(), coins);
       Scene scene = new Scene(grid, 320, 420);
       Stage statsStage = new Stage();
+      statsStage.setResizable(false);
       statsStage.setScene(scene);
       statsStage.setTitle("Title of Game");
       statsStage.show();

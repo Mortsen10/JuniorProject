@@ -41,7 +41,7 @@ public class AttributeValue implements IntValue{
       return atrPtsLabel;
    }
    
-//////////////////////////////////////////////////////////
+
    public int getValue(){
       return atrValue;
    }
@@ -49,6 +49,5 @@ public class AttributeValue implements IntValue{
    public IntValue getParent(){
       return parent;
    }
-//////////////////////////////////////////////////////////
 
 }//class
