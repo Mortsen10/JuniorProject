@@ -7,18 +7,19 @@ import javafx.scene.layout.*;
 public class CharacterStats{
    
    public int[] stats = new int [5];
-   String item;
+   String item, name;
+   int money;
    
    //constructor
-   public CharacterStats(int strength, int cunning, int luck, int speed, int memory){
+   public CharacterStats(int strength, int cunning, int luck, int speed, int memory, String name){
       
       stats[0] = strength;
       stats[1] = cunning;
       stats[2] = luck;
       stats[3] = speed;
       stats[4] = memory;
-      //name
-      //money
+      this.name = name;
+      this.money = 10;
       //array of three equipable items
    }
    
@@ -29,6 +30,14 @@ public class CharacterStats{
    
    public int[] getList(){
       return stats;
+   }
+   
+   public String getName(){
+      return this.name;
+   }
+   
+   public int getMoney(){
+      return this.money;
    }
    
    public void incrementStats(int atr1, int value1, int atr2, int value2){

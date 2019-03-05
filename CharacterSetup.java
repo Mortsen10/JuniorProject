@@ -3,7 +3,6 @@
 ** I can show and hide the buttons on the main screen to add to the plot of the game.
 ** 
 */
-
 import javafx.application.*;
 import javafx.stage.*;
 import javafx.scene.*;
@@ -11,18 +10,19 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.geometry.*;
 
+
 public class CharacterSetup extends Application{
-
-
+   
    @Override
    public void start(Stage primaryStage) throws Exception{
+      int notSpent;
       
-      // instead of a label, I want a scrolable
-      // text thing at the bottom. i want this 
-      // to be seen throught the game (except
-      // in the map)
-      Label out = new Label("welcome. select your character attributes. but be careful,\nas these cannot be changed later on.");
-      GridPane.setConstraints(out, 0, 0);
+      //next screen button
+      HBox submit = new HBox();
+      submit.setAlignment(Pos.CENTER_RIGHT);
+      Button submitBtn = new Button("next");
+      submit.getChildren().addAll(submitBtn);
+      GridPane.setConstraints(submit, 0, 0);
       
       //name input
       Label name = new Label("what should we call you?");
@@ -48,12 +48,17 @@ public class CharacterSetup extends Application{
       Attribute memory = new Attribute("memory", points.getParent(), 0);
          GridPane.setConstraints(memory.getBox(), 0, 6);
       
-      //next screen button
-      HBox submit = new HBox();
-      submit.setAlignment(Pos.CENTER_RIGHT);
-      Button submitBtn = new Button("next");
-      submit.getChildren().addAll(submitBtn);
-      GridPane.setConstraints(submit, 0, 8);
+      //scrolable text output
+      Label out = new Label("welcome. select your character attributes. but be careful,\nas these cannot be changed later on.");
+      GridPane.setConstraints(out, 0, 8);
+            // instead of a label, I want a scrolable
+            // text thing at the bottom. i want this 
+            // to be seen throught the game (except
+            // in the map)
+            //ScrollPane out = new ScrollPane();
+            //out.setHbarPolicy(ScrollBarPolicy.NEVER);
+            //out.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+      
       
       //grid setup
       GridPane grid = new GridPane();
@@ -67,37 +72,37 @@ public class CharacterSetup extends Application{
       primaryStage.setResizable(false);
       primaryStage.setTitle("Title of Game");
       primaryStage.show();
-      
+
       //button actions
-         //int final notSpent = 0;
       submitBtn.setOnAction(e -> {
          if ((nameIn.getText() == null) || (nameIn.getText().isEmpty())){ //no name
-            PopUpWindow nameRemind = new PopUpWindow("even the bravest of\nadventurers needs a name", "continue");
+            //PopUpWindow nameRemind = new PopUpWindow("even the bravest of\nadventurers needs a name", "continue", primaryStage);
+            PopUpWindow nameRemind = new PopUpWindow("even the bravest of\nadventurers needs a name", "continue", scene);
          }else if (points.getValue() != 0){ //not all tokens used
             //if (notSpent <= 1){
                //notSpent++;
-               PopUpWindow tokensRemind = new PopUpWindow("continue? and leave\nmoney unspent?", "spend");
+               //PopUpWindow tokensRemind = new PopUpWindow("continue? and leave\nmoney unspent?", "spend", primaryStage);
+               PopUpWindow tokensRemind = new PopUpWindow("continue? and leave\nmoney unspent?", "spend", scene);
             //}
             /*else if (notSpent == 2){
                notSpent++;
-               PopUpWindow tokensRemind2 = new PopUpWindow(_____); //-------------------------------------------------------------------------------
+               PopUpWindow tokensRemind2 = new PopUpWindow(_____);
             }else if (notSpent >= 3){
                notSpent++;
-               PopUpWindow tokensRemind3 = new PopUpWindow(_____); //-------------------------------------------------------------------------------
+               PopUpWindow tokensRemind3 = new PopUpWindow(_____);
             }*/
          }
-       if ((nameIn != null) && (points.getValue() == 0)){//everything is filled out
-            CharacterStats stats = new CharacterStats(strength.getValue(), cunning.getValue(), luck.getValue(), speed.getValue(), memory.getValue());
+       if ((nameIn != null) && (points.getValue() == 0)){ //everything is filled out
+            CharacterStats stats = new CharacterStats(strength.getValue(), cunning.getValue(), luck.getValue(), speed.getValue(), memory.getValue(), nameIn.getText());
             secondScene(stats);
             primaryStage.hide();
          }
       });
-      
    }//main
    
    
    public void secondScene(CharacterStats stats){
-      
+   
       //buttons
       final ToggleGroup buttons = new ToggleGroup();
       RadioButton shoes = new RadioButton("a shiny pair of red galoshes");//makes a label to the right
@@ -159,16 +164,15 @@ public class CharacterSetup extends Application{
             mainScreen(stats);
             secondStage.hide();
          }else{
-            PopUpWindow itemRemind = new PopUpWindow("every adventurer needs a signaure look", "continue");
+            //PopUpWindow itemRemind = new PopUpWindow("every adventurer needs a signaure look", "continue", secondStage);
+            PopUpWindow itemRemind = new PopUpWindow("every adventurer needs a signaure look", "continue", scene);
          }
       });
-      
    }//second screen
    
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   
    public void mainScreen(CharacterStats stats){
-      
       //buttons
       Button explore = new Button("EXPLORE");
          GridPane.setConstraints(explore, 2, 3);
@@ -211,13 +215,11 @@ public class CharacterSetup extends Application{
       });
       //backpack.setOnAction(e -> backpack());
       //items.setOnAction(e -> items());
-
    }//main screen
    
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   public void stat(CharacterStats stats){
-      
       //grid setup
       GridPane grid = new GridPane();
       grid.setVgap(10);
@@ -231,7 +233,7 @@ public class CharacterSetup extends Application{
       GridPane.setConstraints(top, 0, 0);
       
       //name
-      Label name = new Label("name: "/*take name and convert to ruins*/);
+      Label name = new Label("name: " + stats.getName());
       GridPane.setConstraints(name, 0, 2);
       
       //attributes
@@ -248,7 +250,7 @@ public class CharacterSetup extends Application{
       
       //money
       Label coin = new Label("coin pouch:");
-      Label coinValue = new Label("" + 0);
+      Label coinValue = new Label("" + stats.getMoney());
       HBox coins = new HBox(10);
       coins.getChildren().addAll(coin, coinValue);
       GridPane.setConstraints(coins, 0, 15);
@@ -267,52 +269,30 @@ public class CharacterSetup extends Application{
          mainScreen(stats);
          statsStage.hide();
       });
-      
-      //binding 
-      /*
-         label.textProperty().bind(Bindings.convert(value.getAtrProperty()));
-      */
-      
-  }//stats
-   
-/*   
-   public void backpack(){
-      
-   }//backpack
-   
+   }//stats
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   /*
    public void items(){
+   
+      ListView<String> list = new ListView<String>();
+      list.setPrefWidth(320);
+      list.setPrefHeight(420);
+      
+      ObservableList<String> items = FXCollections.observableArrayList("wood");
+      ListView<String> listView = new ListView<String>(items);
       
    }//items
+   */
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+/*//////////////////////////////////////////
+   public void backpack(){
+   }//backpack
    
    public void map(){
-      
    }//map
-  
-*/
+*///////////////////////////////////////////
+
 
 }//class
-
-/*Label strength = new Label("strength:");
-         GridPane.setConstraints();
-      Label val0 = new Label(""+ stats.getStats(0));
-         GridPane.setConstraints(val0, 0, 2);
-      
-      Label cunning = new Label("cunning:");
-         GridPane.setConstraints();
-      Label val1 = new Label(""+ stats.getStats(1));
-         GridPane.setConstraints(val1, 0, 3);
-         
-      Label luck = new Label("luck:");
-         GridPane.setConstraints();
-      Label val2 = new Label(""+ stats.getStats(2));
-         GridPane.setConstraints(val2, 0, 4);
-         
-      Label speed = new Label("speed:");
-         GridPane.setConstraints();
-      Label val3 = new Label(""+ stats.getStats(3));
-         GridPane.setConstraints(val3, 0, 5);
-         
-      Label memory = new Label("memory:");
-         GridPane.setConstraints();
-      Label val4 = new Label(""+ stats.getStats(4));
-         GridPane.setConstraints(val4, 0, 6);*/
