@@ -9,20 +9,32 @@ import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.geometry.*;
+import javafx.beans.property.*;
 
-
-public class CharacterSetup extends Application{
+public class Main extends Application{
+   
+   int notSpent = 0;
    
    @Override
    public void start(Stage primaryStage) throws Exception{
-      int notSpent;
+      
+      CharacterStats stats = new CharacterStats(0, 0, 0, 0, 0, null);
       
       //next screen button
       HBox submit = new HBox();
       submit.setAlignment(Pos.CENTER_RIGHT);
       Button submitBtn = new Button("next");
       submit.getChildren().addAll(submitBtn);
-      GridPane.setConstraints(submit, 0, 0);
+      GridPane.setConstraints(submit, 0, 7);
+      
+      //distributable points
+      Attribute points = new Attribute("Tokens:", null, 100);
+      GridPane.setConstraints(points.getBox(), 0, 6);
+      
+      //HBox submit = new HBox();
+      //submit.getChildren().addAll(points.getBox(), submitBtn);
+      //submitBtn.setAlignment(Pos.CENTER_RIGHT);
+      //GridPane.setConstraints(submit, 0, 7);
       
       //name input
       Label name = new Label("what should we call you?");
@@ -30,23 +42,19 @@ public class CharacterSetup extends Application{
       nameIn.setPromptText("name");//default text (will be greyed out)
       HBox naming = new HBox(5);
       naming.getChildren().addAll(name, nameIn);
-      GridPane.setConstraints(naming, 0, 1);
-      
-      //distributable points
-      Attribute points = new Attribute("Tokens:", null, 100);
-      GridPane.setConstraints(points.getBox(), 0, 7);
+      GridPane.setConstraints(naming, 0, 0);
       
       //attributes
       Attribute strength = new Attribute("strength", points.getParent(), 0);
-         GridPane.setConstraints(strength.getBox(), 0, 2);
+         GridPane.setConstraints(strength.getBox(), 0, 1);
       Attribute cunning = new Attribute("cunning", points.getParent(), 0);
-         GridPane.setConstraints(cunning.getBox(), 0, 3);
+         GridPane.setConstraints(cunning.getBox(), 0, 2);
       Attribute luck = new Attribute("luck", points.getParent(), 0);
-         GridPane.setConstraints(luck.getBox(), 0, 4);
+         GridPane.setConstraints(luck.getBox(), 0, 3);
       Attribute speed = new Attribute("speed", points.getParent(), 0);
-         GridPane.setConstraints(speed.getBox(), 0, 5);
+         GridPane.setConstraints(speed.getBox(), 0, 4);
       Attribute memory = new Attribute("memory", points.getParent(), 0);
-         GridPane.setConstraints(memory.getBox(), 0, 6);
+         GridPane.setConstraints(memory.getBox(), 0, 5);
       
       //scrolable text output
       Label out = new Label("welcome. select your character attributes. but be careful,\nas these cannot be changed later on.");
@@ -76,24 +84,32 @@ public class CharacterSetup extends Application{
       //button actions
       submitBtn.setOnAction(e -> {
          if ((nameIn.getText() == null) || (nameIn.getText().isEmpty())){ //no name
-            //PopUpWindow nameRemind = new PopUpWindow("even the bravest of\nadventurers needs a name", "continue", primaryStage);
-            PopUpWindow nameRemind = new PopUpWindow("even the bravest of\nadventurers needs a name", "continue", scene);
+            PopUpWindow nameRemind = new PopUpWindow  ("even the bravest of\nadventurers needs a name", "continue");
          }else if (points.getValue() != 0){ //not all tokens used
-            //if (notSpent <= 1){
-               //notSpent++;
-               //PopUpWindow tokensRemind = new PopUpWindow("continue? and leave\nmoney unspent?", "spend", primaryStage);
-               PopUpWindow tokensRemind = new PopUpWindow("continue? and leave\nmoney unspent?", "spend", scene);
-            //}
-            /*else if (notSpent == 2){
+            if (notSpent == 0){
                notSpent++;
-               PopUpWindow tokensRemind2 = new PopUpWindow(_____);
+               PopUpWindow tokensRemind = new PopUpWindow("continue? and leave\nmoney unspent?", "spend");
+            }else if (notSpent == 1){
+               notSpent++;
+               PopUpWindow tokensRemind1 = new PopUpWindow("seriously? you're not\ngoing to spend the\nFREE money i gave to you\nfor FREE", "spend");
+            }else if (notSpent == 2){
+               notSpent++;
+               PopUpWindow tokensRemind2 = new PopUpWindow("are you sure your're sure?", "yes", "no");
+                  //if (){
+                     //
+                  //}else if (){
+                     //
+                  //}
             }else if (notSpent >= 3){
                notSpent++;
-               PopUpWindow tokensRemind3 = new PopUpWindow(_____);
-            }*/
+               PopUpWindow tokensRemind3 = new PopUpWindow("FINE. your are awfully\nannoying by the way", "cash out", points, stats);
+                  stats.newStats(strength.getValue(), cunning.getValue(), luck.getValue(), speed.getValue(), memory.getValue(), nameIn.getText());
+                  secondScene(stats);
+                  primaryStage.hide();
+            }
          }
        if ((nameIn != null) && (points.getValue() == 0)){ //everything is filled out
-            CharacterStats stats = new CharacterStats(strength.getValue(), cunning.getValue(), luck.getValue(), speed.getValue(), memory.getValue(), nameIn.getText());
+            stats.newStats(strength.getValue(), cunning.getValue(), luck.getValue(), speed.getValue(), memory.getValue(), nameIn.getText());
             secondScene(stats);
             primaryStage.hide();
          }
@@ -165,7 +181,8 @@ public class CharacterSetup extends Application{
             secondStage.hide();
          }else{
             //PopUpWindow itemRemind = new PopUpWindow("every adventurer needs a signaure look", "continue", secondStage);
-            PopUpWindow itemRemind = new PopUpWindow("every adventurer needs a signaure look", "continue", scene);
+            //PopUpWindow itemRemind = new PopUpWindow("every adventurer needs a signaure look", "continue", scene);
+            PopUpWindow itemRemind = new PopUpWindow("every adventurer needs a signaure look", "continue");
          }
       });
    }//second screen

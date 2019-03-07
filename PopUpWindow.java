@@ -15,85 +15,136 @@ public class PopUpWindow{
    Scene scene;
    
    //constructor
-   public PopUpWindow(String message, String btn1, Scene scene){
+   public PopUpWindow(String message, String btn1){
       
       //nodes (on top of background)
       Label label = new Label(message);
-         label.setTextFill(Color.WHITE);
+         label.setTextFill(Color.BLACK);
          label.setTextAlignment(TextAlignment.CENTER);
       Button close = new Button(btn1);
+         close.setPrefSize(80, 20);
       VBox layout = new VBox(10);
       layout.getChildren().addAll(label, close);
       layout.setAlignment(Pos.CENTER);
-      
+      GridPane grid = new GridPane();
+      grid.setVgap(1);
+      grid.setHgap(1);
+      grid.setConstraints(layout, 62, 100);
+      grid.getChildren().addAll(layout);
       
       //background
-      Rectangle outside = new Rectangle(0, 0, 320, 420); //----------------------------------------- maybe black window with white lettering, red lettering
-         outside.setFill(Color.rgb(250, 250, 250, 1)); //------------------------------------------- for easter eggs or more impatient messages
-      
-      Rectangle lineOut = new Rectangle(20, 20, 265, 365);
+      Rectangle outside = new Rectangle(0, 0, 320, 440); //--------------------------------------- maybe black window with white lettering,
+         outside.setFill(Color.rgb(250, 250, 250, 1)); //----------------------------------------- red lettering for easter eggs or more
+      Rectangle lineOut = new Rectangle(20, 20, 265, 395); //------------------------------------- impatient messages
          lineOut.setFill(Color.rgb(0, 0, 0, 1));
-      Rectangle lineIn = new Rectangle(35, 35, 235, 335);
-      
+      Rectangle lineIn = new Rectangle(35, 35, 235, 365);
       Shape border = Shape.subtract(lineOut, lineIn);
-      
       Group group = new Group();
-      group.getChildren().addAll(outside, border, layout);
+      group.getChildren().addAll(outside, border, grid);
       
+      //close button
+      close.setOnAction(e -> window.close());
       
       //window setup
-      scene = new Scene(group, 310, 410);
-
-
+      scene = new Scene(group, 310, 440);
       window = new Stage();
       window.setResizable(false);
       window.initStyle(StageStyle.UNDECORATED); //removes title bar
       window.initModality(Modality.APPLICATION_MODAL); //prevents you from messing w/ the screen behind
       window.setScene(scene);
+      window.showAndWait(); //NEEDS to be last so that the button action will be tied to the button before it is blocked by showAndWait()
+   }
+   
+   
+   public PopUpWindow(String message, String btn1, String btn2){
+   
+      //nodes (on top of background)
+      Label label = new Label(message);
+         label.setTextFill(Color.BLACK);
+         label.setTextAlignment(TextAlignment.CENTER);
+      Button one = new Button(btn1);
+      Button two = new Button(btn2);
+      HBox buttons = new HBox();
+      buttons.getChildren().addAll(one, two);
+      VBox layout = new VBox(10);
+      layout.getChildren().addAll(label, buttons);
+      layout.setAlignment(Pos.CENTER);
+      GridPane grid = new GridPane();
+      grid.setVgap(1);
+      grid.setHgap(1);
+      grid.setConstraints(layout, 62, 100);
+      grid.getChildren().addAll(layout);
+      
+      //background
+      Rectangle outside = new Rectangle(0, 0, 320, 420);
+         outside.setFill(Color.rgb(250, 250, 250, 1));
+      Rectangle lineOut = new Rectangle(20, 20, 265, 365);
+         lineOut.setFill(Color.rgb(0, 0, 0, 1));
+      Rectangle lineIn = new Rectangle(35, 35, 235, 335);
+      Shape border = Shape.subtract(lineOut, lineIn);
+      Group group = new Group();
+      group.getChildren().addAll(outside, border, grid);
+      
+      //window setup
+      scene = new Scene(group, 310, 410);
+      window = new Stage();
+      window.setResizable(false);
+      window.initStyle(StageStyle.UNDECORATED);
+      window.initModality(Modality.APPLICATION_MODAL);
+      window.setScene(scene);
       window.showAndWait();
-
-
+      
+      /*//choices
+      one.setOnAction(e -> {
+         window.close();
+      });
+      two.setOnAction(e -> {
+         window.close();
+      });*/
+   }
+   
+   
+   public PopUpWindow(String message, String btn1, Attribute points, CharacterStats stats){
+      
+      //nodes (on top of background)
+      Label label = new Label(message);
+         label.setTextFill(Color.BLACK);
+         label.setTextAlignment(TextAlignment.CENTER);
+      Button close = new Button(btn1);
+         close.setPrefSize(80, 20);
+      VBox layout = new VBox(10);
+      layout.getChildren().addAll(label, close);
+      layout.setAlignment(Pos.CENTER);
+      GridPane grid = new GridPane();
+      grid.setVgap(1);
+      grid.setHgap(1);
+      grid.setConstraints(layout, 62, 100);
+      grid.getChildren().addAll(layout);
+      
+      //background
+      Rectangle outside = new Rectangle(0, 0, 320, 440);
+         outside.setFill(Color.rgb(250, 250, 250, 1));
+      Rectangle lineOut = new Rectangle(20, 20, 265, 395);
+         lineOut.setFill(Color.rgb(0, 0, 0, 1));
+      Rectangle lineIn = new Rectangle(35, 35, 235, 365);
+      Shape border = Shape.subtract(lineOut, lineIn);
+      Group group = new Group();
+      group.getChildren().addAll(outside, border, grid);
+      
       //close button
       close.setOnAction(e -> {
-         //window.hide(); //------------------------------------------------------------------------------------------------------needs to close the window
+         stats.addMoney(points.getValue()/10);
+         window.close();
       });
       
-      
+      //window setup
+      scene = new Scene(group, 310, 440);
+      window = new Stage();
+      window.setResizable(false);
+      window.initStyle(StageStyle.UNDECORATED);
+      window.initModality(Modality.APPLICATION_MODAL);
+      window.setScene(scene);
+      window.showAndWait();
    }
-    
-/* public PopUpWindow(String message, String btn1, String btn2){ }
-   public PopUpWindow(String message){ } */
-   
+
 }//class
-
-
-
-
-
-/*//////transparent rectangle////////////////////////////////////////////
-      Group group = new Group();
-      Rectangle rect = new Rectangle(0, 0, 320, 420);
-      
-      rect.setFill(Color.rgb(140, 140, 140, 0.5));
-      //rect.setFill(Color.TRANSPARENT);
-      group.getChildren().add(rect);
-      
-      Scene scene = new Scene(group);
-      scene.setFill(Color.TRANSPARENT);
-      //stage.initStyle(StageStyle.TRANSPARENT);
-      stage.setScene(scene);
-      stage.show();
-*//*//////////////////////////////////////////////////////////////////////
-      Group group = new Group();
-      Rectangle outside = new Rectangle(0, 0, 320, 420);
-         outside.setFill(Color.rgb(140, 140, 140, 0.5));
-      Rectangle inside = new Rectangle(10, 10, 100, 80);
-         inside.setFill(Color.rgb(0, 0, 0, 0.5));
-      group.getChildren().addAll(outside, inside);
-      
-      Scene scene = new Scene(group);
-      scene.setFill(Color.TRANSPARENT);
-      stage.initStyle(StageStyle.TRANSPARENT);
-      stage.setScene(scene);
-      stage.show();
-*/

@@ -23,6 +23,14 @@ public class CharacterStats{
       //array of three equipable items
    }
    
+   public void newStats(int strength, int cunning, int luck, int speed, int memory, String name){
+      stats[0] = strength;
+      stats[1] = cunning;
+      stats[2] = luck;
+      stats[3] = speed;
+      stats[4] = memory;
+      this.name = name;
+   }
    
    public int getValue(int value){
       return stats[value];
@@ -38,6 +46,10 @@ public class CharacterStats{
    
    public int getMoney(){
       return this.money;
+   }
+   
+   public void addMoney(int n){
+      this.money += n;
    }
    
    public void incrementStats(int atr1, int value1, int atr2, int value2){
