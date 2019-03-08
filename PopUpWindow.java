@@ -52,7 +52,7 @@ public class PopUpWindow{
       window.initStyle(StageStyle.UNDECORATED); //removes title bar
       window.initModality(Modality.APPLICATION_MODAL); //prevents you from messing w/ the screen behind
       window.setScene(scene);
-      window.showAndWait(); //NEEDS to be last so that the button action will be tied to the button before it is blocked by showAndWait()
+      window.showAndWait(); //NEEDS to be last so that the button action will be tied to the button, before it is blocked by showAndWait()
    }
    
    
@@ -63,8 +63,10 @@ public class PopUpWindow{
          label.setTextFill(Color.BLACK);
          label.setTextAlignment(TextAlignment.CENTER);
       Button one = new Button(btn1);
+         //one.setPrefSize();
       Button two = new Button(btn2);
-      HBox buttons = new HBox();
+         //two.setPrefSize();
+      HBox buttons = new HBox(10);
       buttons.getChildren().addAll(one, two);
       VBox layout = new VBox(10);
       layout.getChildren().addAll(label, buttons);
@@ -96,11 +98,25 @@ public class PopUpWindow{
       
       /*//choices
       one.setOnAction(e -> {
+         return true;
          window.close();
       });
       two.setOnAction(e -> {
+         return false;
          window.close();
       });*/
+      
+      one.setOnAction(e -> {
+         PopUpWindow yesImSure = new PopUpWindow("FINE. your are awfully\nannoying by the way", "cash out", points, stats);
+            //show ("+" + points.getValue()/10)
+         stats.newStats(strength.getValue(), cunning.getValue(), luck.getValue(), speed.getValue(), memory.getValue(), nameIn.getText());
+         secondScene(stats);
+         primaryStage.hide();
+       });
+       two.setOnAction(e -> {
+         notSpent++;
+         PopUpWindow noImNotSure = new PopUpWindow("please just hurry up. i want to go home");
+       });
    }
    
    

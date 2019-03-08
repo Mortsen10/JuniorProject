@@ -88,24 +88,37 @@ public class Main extends Application{
          }else if (points.getValue() != 0){ //not all tokens used
             if (notSpent == 0){
                notSpent++;
-               PopUpWindow tokensRemind = new PopUpWindow("continue? and leave\nmoney unspent?", "spend");
+               PopUpWindow tokensRemind = new PopUpWindow("continue? and leave money unspent?", "spend");
             }else if (notSpent == 1){
                notSpent++;
-               PopUpWindow tokensRemind1 = new PopUpWindow("seriously? you're not\ngoing to spend the\nFREE money i gave to you\nfor FREE", "spend");
+               PopUpWindow tokensRemind1 = new PopUpWindow("seriously? you're not going to spend the\nFREE money i gave to you for FREE?", "spend");
             }else if (notSpent == 2){
                notSpent++;
                PopUpWindow tokensRemind2 = new PopUpWindow("are you sure your're sure?", "yes", "no");
-                  //if (){
-                     //
-                  //}else if (){
-                     //
-                  //}
+               
+               /*
+                  tokensRemind2.one.setOnAction(e -> {
+                     PopUpWindow yesImSure = new PopUpWindow("FINE. your are awfully\nannoying by the way", "cash out", points, stats);
+                        //show ("+" + points.getValue()/10)
+                     stats.newStats(strength.getValue(), cunning.getValue(), luck.getValue(), speed.getValue(), memory.getValue(), nameIn.getText());
+                     secondScene(stats);
+                     primaryStage.hide();
+                  });
+                  tokensRemind2.two.setOnAction(e -> {
+                     notSpent++;
+                     PopUpWindow noImNotSure = new PopUpWindow("please just hurry up. i want to go home");
+                  });
+               */
+               
+            //}else if (notSpent == 3){
+               //PopUpWindow tokensRemind3 = new PopUpWindow("FINE. you are awfully annoying by the way", "cash out", points, stats);
+               //show ("+" + points.getValue()/10)
+               //stats.newStats(strength.getValue(), cunning.getValue(), luck.getValue(), speed.getValue(), memory.getValue(), nameIn.getText());
+               //secondScene(stats);
+               //primaryStage.hide();
+               
             }else if (notSpent >= 3){
-               notSpent++;
-               PopUpWindow tokensRemind3 = new PopUpWindow("FINE. your are awfully\nannoying by the way", "cash out", points, stats);
-                  stats.newStats(strength.getValue(), cunning.getValue(), luck.getValue(), speed.getValue(), memory.getValue(), nameIn.getText());
-                  secondScene(stats);
-                  primaryStage.hide();
+               PopUpWindow bye = new PopUpWindow("yeah... i'm just 'gonna kick you out", "bye");
             }
          }
        if ((nameIn != null) && (points.getValue() == 0)){ //everything is filled out
