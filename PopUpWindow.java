@@ -12,7 +12,7 @@ import javafx.scene.text.*;
 public class PopUpWindow{
    
    Stage window;
-   Scene scene;
+   Boolean yesNo;
    
    //constructor
    public PopUpWindow(String message, String btn1){
@@ -22,16 +22,20 @@ public class PopUpWindow{
          label.setTextFill(Color.BLACK);
          label.setTextAlignment(TextAlignment.CENTER);
       Button close = new Button(btn1);
-         close.setPrefSize(80, 20);
-      VBox layout = new VBox(10);
-      layout.getChildren().addAll(label, close);
-      layout.setAlignment(Pos.CENTER);
+         close.setPrefSize(80, 20);      
+      //VBox layout = new VBox(10);
+      //layout.getChildren().addAll(label, close);
+      //layout.setAlignment(Pos.CENTER);
+      
       GridPane grid = new GridPane();
       grid.setVgap(1);
       grid.setHgap(1);
-      grid.setConstraints(layout, 62, 100);
-      grid.getChildren().addAll(layout);
       
+      grid.setConstraints(label, 40, 100);
+      grid.setConstraints(close, 50, 150); //---------------------------------------------------------------------------------------------- fix orientation
+      
+      grid.getChildren().addAll(label, close);
+            
       //background
       Rectangle outside = new Rectangle(0, 0, 320, 440); //--------------------------------------- maybe black window with white lettering,
          outside.setFill(Color.rgb(250, 250, 250, 1)); //----------------------------------------- red lettering for easter eggs or more
@@ -46,7 +50,7 @@ public class PopUpWindow{
       close.setOnAction(e -> window.close());
       
       //window setup
-      scene = new Scene(group, 310, 440);
+      Scene scene = new Scene(group, 310, 440);
       window = new Stage();
       window.setResizable(false);
       window.initStyle(StageStyle.UNDECORATED); //removes title bar
@@ -74,7 +78,7 @@ public class PopUpWindow{
       GridPane grid = new GridPane();
       grid.setVgap(1);
       grid.setHgap(1);
-      grid.setConstraints(layout, 62, 100);
+      grid.setConstraints(layout, 50, 100);
       grid.getChildren().addAll(layout);
       
       //background
@@ -88,7 +92,7 @@ public class PopUpWindow{
       group.getChildren().addAll(outside, border, grid);
       
       //window setup
-      scene = new Scene(group, 310, 410);
+      Scene scene = new Scene(group, 310, 410);
       window = new Stage();
       window.setResizable(false);
       window.initStyle(StageStyle.UNDECORATED);
@@ -96,26 +100,14 @@ public class PopUpWindow{
       window.setScene(scene);
       window.showAndWait();
       
-      /*//choices
+      //choices
       one.setOnAction(e -> {
-         return true;
+         this.yesNo = true;
          window.close();
-      });
-      two.setOnAction(e -> {
-         return false;
-         window.close();
-      });*/
-      
-      one.setOnAction(e -> {
-         PopUpWindow yesImSure = new PopUpWindow("FINE. your are awfully\nannoying by the way", "cash out", points, stats);
-            //show ("+" + points.getValue()/10)
-         stats.newStats(strength.getValue(), cunning.getValue(), luck.getValue(), speed.getValue(), memory.getValue(), nameIn.getText());
-         secondScene(stats);
-         primaryStage.hide();
        });
        two.setOnAction(e -> {
-         notSpent++;
-         PopUpWindow noImNotSure = new PopUpWindow("please just hurry up. i want to go home");
+         this.yesNo = false;
+         window.close();
        });
    }
    
@@ -154,13 +146,17 @@ public class PopUpWindow{
       });
       
       //window setup
-      scene = new Scene(group, 310, 440);
+      Scene scene = new Scene(group, 310, 440);
       window = new Stage();
       window.setResizable(false);
       window.initStyle(StageStyle.UNDECORATED);
       window.initModality(Modality.APPLICATION_MODAL);
       window.setScene(scene);
       window.showAndWait();
+   }
+   
+   public Boolean getButton(){
+      return this.yesNo;
    }
 
 }//class

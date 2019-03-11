@@ -94,31 +94,20 @@ public class Main extends Application{
                PopUpWindow tokensRemind1 = new PopUpWindow("seriously? you're not going to spend the\nFREE money i gave to you for FREE?", "spend");
             }else if (notSpent == 2){
                notSpent++;
-               PopUpWindow tokensRemind2 = new PopUpWindow("are you sure your're sure?", "yes", "no");
+               PopUpWindow tokensRemind2 = new PopUpWindow("are you sure you're sure?", "yes", "no");
                
-               /*
-                  tokensRemind2.one.setOnAction(e -> {
-                     PopUpWindow yesImSure = new PopUpWindow("FINE. your are awfully\nannoying by the way", "cash out", points, stats);
+                  if (tokensRemind2.getButton() == true){
+                     notSpent++;
+                     PopUpWindow yesImSure = new PopUpWindow("FINE. your are awfully\nannoying by the way", "cash out");
+                     stats.addMoney(points.getValue()/10);
                         //show ("+" + points.getValue()/10)
                      stats.newStats(strength.getValue(), cunning.getValue(), luck.getValue(), speed.getValue(), memory.getValue(), nameIn.getText());
-                     secondScene(stats);
-                     primaryStage.hide();
-                  });
-                  tokensRemind2.two.setOnAction(e -> {
-                     notSpent++;
-                     PopUpWindow noImNotSure = new PopUpWindow("please just hurry up. i want to go home");
-                  });
-               */
-               
-            //}else if (notSpent == 3){
-               //PopUpWindow tokensRemind3 = new PopUpWindow("FINE. you are awfully annoying by the way", "cash out", points, stats);
-               //show ("+" + points.getValue()/10)
-               //stats.newStats(strength.getValue(), cunning.getValue(), luck.getValue(), speed.getValue(), memory.getValue(), nameIn.getText());
-               //secondScene(stats);
-               //primaryStage.hide();
-               
+                  }else if (tokensRemind2.getButton() == false){
+                     PopUpWindow noImNotSure = new PopUpWindow("please just hurry up. i want to go home", "continue");
+                  }               
             }else if (notSpent >= 3){
                PopUpWindow bye = new PopUpWindow("yeah... i'm just 'gonna kick you out", "bye");
+               primaryStage.close();
             }
          }
        if ((nameIn != null) && (points.getValue() == 0)){ //everything is filled out
