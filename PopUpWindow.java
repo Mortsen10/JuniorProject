@@ -21,20 +21,19 @@ public class PopUpWindow{
       Label label = new Label(message);
          label.setTextFill(Color.BLACK);
          label.setTextAlignment(TextAlignment.CENTER);
+         //label.setPrefSize(210, 100);
+         label.setPrefWidth(210);
+         label.setWrapText(true); //you dont have to use \n for a new line. the text will fit to the box
       Button close = new Button(btn1);
-         close.setPrefSize(80, 20);      
-      //VBox layout = new VBox(10);
-      //layout.getChildren().addAll(label, close);
-      //layout.setAlignment(Pos.CENTER);
+         close.setPrefSize(80, 20);
       
       GridPane grid = new GridPane();
       grid.setVgap(1);
       grid.setHgap(1);
-      
-      grid.setConstraints(label, 40, 100);
-      grid.setConstraints(close, 50, 150); //---------------------------------------------------------------------------------------------- fix orientation
-      
-      grid.getChildren().addAll(label, close);
+      VBox box = new VBox(10);
+      box.getChildren().addAll(label, close);
+      grid.setConstraints(box, 35, 100);
+      grid.getChildren().addAll(box);
             
       //background
       Rectangle outside = new Rectangle(0, 0, 320, 440); //--------------------------------------- maybe black window with white lettering,
@@ -65,7 +64,9 @@ public class PopUpWindow{
       //nodes (on top of background)
       Label label = new Label(message);
          label.setTextFill(Color.BLACK);
+         label.setPrefSize(210, 100);
          label.setTextAlignment(TextAlignment.CENTER);
+         label.setWrapText(true);
       Button one = new Button(btn1);
          //one.setPrefSize();
       Button two = new Button(btn2);
@@ -78,8 +79,16 @@ public class PopUpWindow{
       GridPane grid = new GridPane();
       grid.setVgap(1);
       grid.setHgap(1);
-      grid.setConstraints(layout, 50, 100);
+      grid.setConstraints(layout, 35, 100);
       grid.getChildren().addAll(layout);
+      
+      /*GridPane grid = new GridPane();
+      grid.setVgap(1);
+      grid.setHgap(1);
+      VBox box = new VBox(10);
+      box.getChildren().addAll(label, close);
+      grid.setConstraints(box, 35, 100);
+      grid.getChildren().addAll(box);*/
       
       //background
       Rectangle outside = new Rectangle(0, 0, 320, 420);
@@ -91,6 +100,18 @@ public class PopUpWindow{
       Group group = new Group();
       group.getChildren().addAll(outside, border, grid);
       
+      //choices //------------------------------------------------------------------------------------------------------ isn't reading button button clicks
+      one.setOnAction(e -> {
+        this.yesNo = true;
+           System.out.println("true");
+        window.close();
+      });
+      two.setOnAction(e -> {
+        this.yesNo = false;
+           System.out.println("false");
+        window.close();
+      });
+      
       //window setup
       Scene scene = new Scene(group, 310, 410);
       window = new Stage();
@@ -99,16 +120,6 @@ public class PopUpWindow{
       window.initModality(Modality.APPLICATION_MODAL);
       window.setScene(scene);
       window.showAndWait();
-      
-      //choices
-      one.setOnAction(e -> {
-         this.yesNo = true;
-         window.close();
-       });
-       two.setOnAction(e -> {
-         this.yesNo = false;
-         window.close();
-       });
    }
    
    
@@ -118,6 +129,8 @@ public class PopUpWindow{
       Label label = new Label(message);
          label.setTextFill(Color.BLACK);
          label.setTextAlignment(TextAlignment.CENTER);
+         label.setPrefSize(210, 100);
+         label.setWrapText(true);
       Button close = new Button(btn1);
          close.setPrefSize(80, 20);
       VBox layout = new VBox(10);
@@ -126,7 +139,7 @@ public class PopUpWindow{
       GridPane grid = new GridPane();
       grid.setVgap(1);
       grid.setHgap(1);
-      grid.setConstraints(layout, 62, 100);
+      grid.setConstraints(layout, 35, 100);
       grid.getChildren().addAll(layout);
       
       //background

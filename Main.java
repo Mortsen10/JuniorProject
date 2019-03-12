@@ -84,27 +84,26 @@ public class Main extends Application{
       //button actions
       submitBtn.setOnAction(e -> {
          if ((nameIn.getText() == null) || (nameIn.getText().isEmpty())){ //no name
-            PopUpWindow nameRemind = new PopUpWindow  ("even the bravest of\nadventurers needs a name", "continue");
+            PopUpWindow nameRemind = new PopUpWindow  ("even the bravest of adventurers needs a name", "continue");
          }else if (points.getValue() != 0){ //not all tokens used
             if (notSpent == 0){
                notSpent++;
                PopUpWindow tokensRemind = new PopUpWindow("continue? and leave money unspent?", "spend");
             }else if (notSpent == 1){
                notSpent++;
-               PopUpWindow tokensRemind1 = new PopUpWindow("seriously? you're not going to spend the\nFREE money i gave to you for FREE?", "spend");
+               PopUpWindow tokensRemind1 = new PopUpWindow("seriously? you're not going to spend the FREE money i gave to you for FREE?", "spend");
             }else if (notSpent == 2){
                notSpent++;
                PopUpWindow tokensRemind2 = new PopUpWindow("are you sure you're sure?", "yes", "no");
-               
                   if (tokensRemind2.getButton() == true){
-                     notSpent++;
-                     PopUpWindow yesImSure = new PopUpWindow("FINE. your are awfully\nannoying by the way", "cash out");
+                     PopUpWindow yesImSure = new PopUpWindow("FINE. you are awfully annoying by the way", "cash out");
                      stats.addMoney(points.getValue()/10);
                         //show ("+" + points.getValue()/10)
                      stats.newStats(strength.getValue(), cunning.getValue(), luck.getValue(), speed.getValue(), memory.getValue(), nameIn.getText());
                   }else if (tokensRemind2.getButton() == false){
+                     notSpent++;
                      PopUpWindow noImNotSure = new PopUpWindow("please just hurry up. i want to go home", "continue");
-                  }               
+                  }
             }else if (notSpent >= 3){
                PopUpWindow bye = new PopUpWindow("yeah... i'm just 'gonna kick you out", "bye");
                primaryStage.close();
