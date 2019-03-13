@@ -21,16 +21,17 @@ public class PopUpWindow{
       Label label = new Label(message);
          label.setTextFill(Color.BLACK);
          label.setTextAlignment(TextAlignment.CENTER);
-         //label.setPrefSize(210, 100);
          label.setPrefWidth(210);
          label.setWrapText(true); //you dont have to use \n for a new line. the text will fit to the box
       Button close = new Button(btn1);
          close.setPrefSize(80, 20);
+         //close.setAlignment(Pos.CENTER);
       
       GridPane grid = new GridPane();
       grid.setVgap(1);
       grid.setHgap(1);
       VBox box = new VBox(10);
+      box.setAlignment(Pos.CENTER);
       box.getChildren().addAll(label, close);
       grid.setConstraints(box, 35, 100);
       grid.getChildren().addAll(box);
@@ -64,56 +65,49 @@ public class PopUpWindow{
       //nodes (on top of background)
       Label label = new Label(message);
          label.setTextFill(Color.BLACK);
-         label.setPrefSize(210, 100);
+         label.setPrefWidth(210);
          label.setTextAlignment(TextAlignment.CENTER);
          label.setWrapText(true);
       Button one = new Button(btn1);
-         //one.setPrefSize();
+         one.setPrefSize(50, 20);
       Button two = new Button(btn2);
-         //two.setPrefSize();
+         two.setPrefSize(50, 20);
+         
       HBox buttons = new HBox(10);
       buttons.getChildren().addAll(one, two);
+      
       VBox layout = new VBox(10);
       layout.getChildren().addAll(label, buttons);
       layout.setAlignment(Pos.CENTER);
+      
       GridPane grid = new GridPane();
       grid.setVgap(1);
       grid.setHgap(1);
-      grid.setConstraints(layout, 35, 100);
+      grid.setConstraints(layout, 65, 100);
       grid.getChildren().addAll(layout);
-      
-      /*GridPane grid = new GridPane();
-      grid.setVgap(1);
-      grid.setHgap(1);
-      VBox box = new VBox(10);
-      box.getChildren().addAll(label, close);
-      grid.setConstraints(box, 35, 100);
-      grid.getChildren().addAll(box);*/
-      
+            
       //background
       Rectangle outside = new Rectangle(0, 0, 320, 420);
          outside.setFill(Color.rgb(250, 250, 250, 1));
-      Rectangle lineOut = new Rectangle(20, 20, 265, 365);
+      Rectangle lineOut = new Rectangle(20, 20, 265, 395);
          lineOut.setFill(Color.rgb(0, 0, 0, 1));
-      Rectangle lineIn = new Rectangle(35, 35, 235, 335);
+      Rectangle lineIn = new Rectangle(35, 35, 235, 365);
       Shape border = Shape.subtract(lineOut, lineIn);
       Group group = new Group();
       group.getChildren().addAll(outside, border, grid);
       
-      //choices //------------------------------------------------------------------------------------------------------ isn't reading button button clicks
+      //choices
       one.setOnAction(e -> {
         this.yesNo = true;
-           System.out.println("true");
         window.close();
       });
       two.setOnAction(e -> {
         this.yesNo = false;
-           System.out.println("false");
         window.close();
       });
       
       //window setup
-      Scene scene = new Scene(group, 310, 410);
+      Scene scene = new Scene(group, 310, 440);
       window = new Stage();
       window.setResizable(false);
       window.initStyle(StageStyle.UNDECORATED);
@@ -124,7 +118,7 @@ public class PopUpWindow{
    
    
    public PopUpWindow(String message, String btn1, Attribute points, CharacterStats stats){
-      
+   
       //nodes (on top of background)
       Label label = new Label(message);
          label.setTextFill(Color.BLACK);
@@ -133,6 +127,7 @@ public class PopUpWindow{
          label.setWrapText(true);
       Button close = new Button(btn1);
          close.setPrefSize(80, 20);
+         //close.setAlignment(Pos.CENTER);
       VBox layout = new VBox(10);
       layout.getChildren().addAll(label, close);
       layout.setAlignment(Pos.CENTER);

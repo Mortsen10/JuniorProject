@@ -100,6 +100,8 @@ public class Main extends Application{
                      stats.addMoney(points.getValue()/10);
                         //show ("+" + points.getValue()/10)
                      stats.newStats(strength.getValue(), cunning.getValue(), luck.getValue(), speed.getValue(), memory.getValue(), nameIn.getText());
+                     secondScene(stats);
+                     primaryStage.hide();
                   }else if (tokensRemind2.getButton() == false){
                      notSpent++;
                      PopUpWindow noImNotSure = new PopUpWindow("please just hurry up. i want to go home", "continue");
