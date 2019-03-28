@@ -57,7 +57,7 @@ public class Main extends Application{
          GridPane.setConstraints(memory.getBox(), 0, 5);
             
       //scrolable text output
-      TextArea text = new TextArea("welcome. select your character attributes. but be careful, as these cannot be changed later on.\n");
+      TextArea text = new TextArea("welcome. select your character attributes. but be careful, as these cannot be changed later on.\n\n");
       text.setEditable(false);
       text.setWrapText(true);
       GridPane.setConstraints(text, 0, 8);
@@ -92,18 +92,18 @@ public class Main extends Application{
                   if (tokensRemind2.getButton() == true){
                      PopUpWindow yesImSure = new PopUpWindow("FINE. you are awfully annoying by the way", "cash out");
                      stats.addMoney(points.getValue()/10);
-                     text.appendText("+" + points.getValue() + "coins\n"); 
+                     text.appendText("+" + points.getValue() + " coins\n\n"); 
                      if(strength.getValue() != 0){
-                        text.appendText("+" + strength.getValue() + "strength\n"); //prints out to scrolable text area
+                        text.appendText("+" + strength.getValue() + " strength\n"); //prints out to scrolable text area
                      }if(cunning.getValue() != 0){
-                        text.appendText("+" + cunning.getValue() + "cunning\n");
+                        text.appendText("+" + cunning.getValue() + " cunning\n");
                      }if(luck.getValue() != 0){
-                        text.appendText("+" + luck.getValue() + "luck\n");
+                        text.appendText("+" + luck.getValue() + " luck\n");
                      }if(speed.getValue() != 0){
-                        text.appendText("+" + speed.getValue() + "speed\n");
+                        text.appendText("+" + speed.getValue() + " speed\n");
                      }if(memory.getValue() != 0){
-                        text.appendText("+" + memory.getValue() + "memory\n");
-                     }
+                        text.appendText("+" + memory.getValue() + " memory\n");
+                     } //--------------------------------------------------------------------------------// would like to have them appear one by one and THEN switch screens
                      stats.newStats(strength.getValue(), cunning.getValue(), luck.getValue(), speed.getValue(), memory.getValue(), nameIn.getText());
                      secondScene(stats, text);
                      primaryStage.hide();
@@ -118,15 +118,15 @@ public class Main extends Application{
          }
        if ((nameIn != null) && (points.getValue() == 0)){ //everything is filled out
             if(strength.getValue() != 0){
-               text.appendText("+" + strength.getValue()/10 + "strength"); //prints out to scrolable text area
+               text.appendText("+" + strength.getValue() + " strength\n"); //prints out to scrolable text area
             }if(cunning.getValue() != 0){
-               text.appendText("+" + cunning.getValue()/10 + "cunning");
+               text.appendText("+" + cunning.getValue() + " cunning\n");
             }if(luck.getValue() != 0){
-               text.appendText("+" + luck.getValue()/10 + "luck");
+               text.appendText("+" + luck.getValue() + " luck\n");
             }if(speed.getValue() != 0){
-               text.appendText("+" + speed.getValue()/10 + "speed");
+               text.appendText("+" + speed.getValue() + " speed\n");
             }if(memory.getValue() != 0){
-               text.appendText("+" + memory.getValue()/10 + "memory");
+               text.appendText("+" + memory.getValue() + " memory\n");
             }
             stats.newStats(strength.getValue(), cunning.getValue(), luck.getValue(), speed.getValue(), memory.getValue(), nameIn.getText());
             secondScene(stats, text);
@@ -185,18 +185,27 @@ public class Main extends Application{
          if (buttons.getSelectedToggle() != null){
                if (buttons.getSelectedToggle() == shoes){
                   stats.incrementStats(2, 10, 3, 5);
+                  text.appendText("\n+10 luck\n");
+                  text.appendText("+5 speed\n");
                   //stats.equipItem(____); //---------------------------------------------------- i want the player to be notified that they got extra 
                }else if (buttons.getSelectedToggle() == wHat){ //-------------------------------- attribute points on the next screen in the text window
                   stats.incrementStats(1, 10, 0, 5); //------------------------------------------ thing. ex: +10 speed, +5 cunning (name of object)
+                  text.appendText("\n+10 cunning\n");
+                  text.appendText("+5 strength\n");
                   //stats.equipItem(____);
                }else if (buttons.getSelectedToggle() == scarf){
                   stats.incrementStats(4, 10, 1, 5);
+                  text.appendText("\n+10 memory\n");
+                  text.appendText("+5 cunning\n");
                   //stats.equipItem(____);
                }else if (buttons.getSelectedToggle() == sHat){
                   stats.incrementStats(3, 10, 4, 5);
+                  text.appendText("\n+10 speed\n");
+                  text.appendText("+5 memory\n");
                   //stats.equipItem(____);
                }else if (buttons.getSelectedToggle() == hands){
                   stats.incrementStats(0, 15, 0, 0);
+                  text.appendText("\n+15 strength\n");
                   //stats.equipItem(____);
                }
             mainScreen(stats, text);
