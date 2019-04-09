@@ -1,8 +1,3 @@
-/*
-** If I can figure out how to not switch screens, but instead show and hide layouts,
-** I can show and hide the buttons on the main screen to add to the plot of the game.
-** 
-*/
 import javafx.application.*;
 import javafx.stage.*;
 import javafx.scene.*;
@@ -12,12 +7,10 @@ import javafx.geometry.*;
 import javafx.beans.property.*;
 
 public class Main extends Application{
-   
    int notSpent = 0;
    
    @Override
    public void start(Stage primaryStage) throws Exception{
-      
       CharacterStats stats = new CharacterStats(0, 0, 0, 0, 0, null);
       
       //next screen button
@@ -77,9 +70,9 @@ public class Main extends Application{
 
       //button actions
       submitBtn.setOnAction(e -> {
-         if ((nameIn.getText() == null) || (nameIn.getText().isEmpty())){ //no name
+         if ((nameIn.getText() == null) || (nameIn.getText().isEmpty())){//no name
             PopUpWindow nameRemind = new PopUpWindow  ("even the bravest of adventurers needs a name", "continue");
-         }else if (points.getValue() != 0){ //not all tokens used
+         }else if (points.getValue() != 0){//not all tokens used
             if (notSpent == 0){
                notSpent++;
                PopUpWindow tokensRemind = new PopUpWindow("continue? and leave money unspent?", "spend");
@@ -94,7 +87,7 @@ public class Main extends Application{
                      stats.addMoney(points.getValue()/10);
                      text.appendText("+" + points.getValue() + " coins\n\n"); 
                      if(strength.getValue() != 0){
-                        text.appendText("+" + strength.getValue() + " strength\n"); //prints out to scrolable text area
+                        text.appendText("+" + strength.getValue() + " strength\n");//prints out to scrolable text area
                      }if(cunning.getValue() != 0){
                         text.appendText("+" + cunning.getValue() + " cunning\n");
                      }if(luck.getValue() != 0){
@@ -103,7 +96,7 @@ public class Main extends Application{
                         text.appendText("+" + speed.getValue() + " speed\n");
                      }if(memory.getValue() != 0){
                         text.appendText("+" + memory.getValue() + " memory\n");
-                     } //--------------------------------------------------------------------------------// would like to have them appear one by one and THEN switch screens
+                     }//----------------------------------------------------------------------------------------------------------------------------------------------// would like to have them appear one by one and THEN switch screens
                      stats.newStats(strength.getValue(), cunning.getValue(), luck.getValue(), speed.getValue(), memory.getValue(), nameIn.getText());
                      secondScene(stats, text);
                      primaryStage.hide();
@@ -116,9 +109,9 @@ public class Main extends Application{
                primaryStage.close();
             }
          }
-       if ((nameIn != null) && (points.getValue() == 0)){ //everything is filled out
+       if ((nameIn != null) && (points.getValue() == 0)){//everything is filled out
             if(strength.getValue() != 0){
-               text.appendText("+" + strength.getValue() + " strength\n"); //prints out to scrolable text area
+               text.appendText("+" + strength.getValue() + " strength\n");//prints out to scrolable text area
             }if(cunning.getValue() != 0){
                text.appendText("+" + cunning.getValue() + " cunning\n");
             }if(luck.getValue() != 0){
@@ -137,7 +130,6 @@ public class Main extends Application{
    
    
    public void secondScene(CharacterStats stats, TextArea text){
-      
       GridPane.setConstraints(text, 0, 9);
       
       //buttons
@@ -187,9 +179,9 @@ public class Main extends Application{
                   stats.incrementStats(2, 10, 3, 5);
                   text.appendText("\n+10 luck\n");
                   text.appendText("+5 speed\n");
-                  //stats.equipItem(____); //---------------------------------------------------- i want the player to be notified that they got extra 
-               }else if (buttons.getSelectedToggle() == wHat){ //-------------------------------- attribute points on the next screen in the text window
-                  stats.incrementStats(1, 10, 0, 5); //------------------------------------------ thing. ex: +10 speed, +5 cunning (name of object)
+                  //stats.equipItem(____);
+               }else if (buttons.getSelectedToggle() == wHat){
+                  stats.incrementStats(1, 10, 0, 5);
                   text.appendText("\n+10 cunning\n");
                   text.appendText("+5 strength\n");
                   //stats.equipItem(____);
@@ -217,8 +209,9 @@ public class Main extends Application{
    }//second screen
    
    
+   
    public void mainScreen(CharacterStats stats, TextArea text){
-            
+      
       //buttons
       Button explore = new Button("EXPLORE");
          GridPane.setConstraints(explore, 2, 3);
@@ -243,11 +236,10 @@ public class Main extends Application{
       grid.setVgap(15);
       grid.setHgap(20);
       grid.setPadding(new Insets(10, 10, 10, 10));
-      grid.getChildren().addAll(explore, btns1, btns2, text);
+      grid.getChildren().addAll(explore, btns1, btns2);
       
       //text output
-      GridPane.setConstraints(text, 2, 7); //------------------------------------------------------------------------------------ NEEDS TO SPAN FROM 0 - end of screen
-      //grid.getChildren().add(text, int columnIndex, int rowIndex, int colspan, int rowspan);
+      grid.add(text, 0, 14, 6, 8);
       
       //window setup
       Scene scene = new Scene(grid, 320, 420);
@@ -258,20 +250,24 @@ public class Main extends Application{
       mainStage.show();
       
       //button actions
-      //explore.setOnAction(e -> map());
       statsBtn.setOnAction(e -> {
          stat(stats, text);
          mainStage.hide();
       });
+      items.setOnAction(e -> {
+         //items(stats, text);
+         mainStage.hide();
+      });
+      
+      
+      //explore.setOnAction(e -> map());
       //backpack.setOnAction(e -> backpack());
-      //items.setOnAction(e -> items());
+         
    }//main screen
    
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   public void stat(CharacterStats stats, TextArea text){
-      
-      GridPane.setConstraints(text, 1, 10);
       
       //grid setup
       GridPane grid = new GridPane();
@@ -306,10 +302,13 @@ public class Main extends Application{
       Label coinValue = new Label("" + stats.getMoney());
       HBox coins = new HBox(10);
       coins.getChildren().addAll(coin, coinValue);
-      GridPane.setConstraints(coins, 0, 15);
+      GridPane.setConstraints(coins, 0, 11);
+      
+      //text output
+      grid.add(text, 0, 13, 2, 6);
       
       //window setup
-      grid.getChildren().addAll(top, name, strength.getBox(), cunning.getBox(), luck.getBox(), speed.getBox(), memory.getBox(), coins, text);
+      grid.getChildren().addAll(top, name, strength.getBox(), cunning.getBox(), luck.getBox(), speed.getBox(), memory.getBox(), coins);
       Scene scene = new Scene(grid, 320, 420);
       Stage statsStage = new Stage();
       statsStage.setResizable(false);
@@ -325,8 +324,7 @@ public class Main extends Application{
    }//stats
    
    
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   /*
+/*
    public void items(){
    
       ListView<String> list = new ListView<String>();
@@ -337,17 +335,16 @@ public class Main extends Application{
       ListView<String> listView = new ListView<String>(items);
       
    }//items
-   */
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+*/
 
 
-/*//////////////////////////////////////////
+/*
    public void backpack(){
    }//backpack
    
    public void map(){
    }//map
-*///////////////////////////////////////////
+*/
 
 
 }//class
