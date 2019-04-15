@@ -25,7 +25,6 @@ public class PopUpWindow{
          label.setWrapText(true); //you dont have to use \n for a new line. the text will fit to the box
       Button close = new Button(btn1);
          close.setPrefSize(80, 20);
-         //close.setAlignment(Pos.CENTER);
       
       GridPane grid = new GridPane();
       grid.setVgap(1);
@@ -37,9 +36,9 @@ public class PopUpWindow{
       grid.getChildren().addAll(box);
             
       //background
-      Rectangle outside = new Rectangle(0, 0, 320, 440); //--------------------------------------- maybe black window with white lettering,
-         outside.setFill(Color.rgb(250, 250, 250, 1)); //----------------------------------------- red lettering for easter eggs or more
-      Rectangle lineOut = new Rectangle(20, 20, 265, 395); //------------------------------------- impatient messages
+      Rectangle outside = new Rectangle(0, 0, 320, 440);
+         outside.setFill(Color.rgb(250, 250, 250, 1));
+      Rectangle lineOut = new Rectangle(20, 20, 265, 395);
          lineOut.setFill(Color.rgb(0, 0, 0, 1));
       Rectangle lineIn = new Rectangle(35, 35, 235, 365);
       Shape border = Shape.subtract(lineOut, lineIn);
@@ -127,7 +126,6 @@ public class PopUpWindow{
          label.setWrapText(true);
       Button close = new Button(btn1);
          close.setPrefSize(80, 20);
-         //close.setAlignment(Pos.CENTER);
       VBox layout = new VBox(10);
       layout.getChildren().addAll(label, close);
       layout.setAlignment(Pos.CENTER);

@@ -12,7 +12,6 @@ public class CharacterStats{
    
    //constructor
    public CharacterStats(int strength, int cunning, int luck, int speed, int memory, String name){
-      
       stats[0] = strength;
       stats[1] = cunning;
       stats[2] = luck;
@@ -20,7 +19,6 @@ public class CharacterStats{
       stats[4] = memory;
       this.name = name;
       this.money = 10;
-      //array of three equipable items
    }
    
    public void newStats(int strength, int cunning, int luck, int speed, int memory, String name){
@@ -57,7 +55,12 @@ public class CharacterStats{
       stats[atr2] += value2;
    }
    
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
    public void equipItem(){
+      
+   }
+   public void dropItem(){
       
    }
    

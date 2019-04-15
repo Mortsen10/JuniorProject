@@ -9,9 +9,22 @@ import javafx.beans.property.*;
 public class Main extends Application{
    int notSpent = 0;
    
+   private Attribute strength;
+   private Attribute cunning;
+   private Attribute luck;
+   private Attribute speed;
+   private Attribute memory;
+   
+   private TextArea       text;
+   private CharacterStats stats;
+   private TextField      nameIn;
+   
+   Inventory inventory = new Inventory();
+   
+   
    @Override
    public void start(Stage primaryStage) throws Exception{
-      CharacterStats stats = new CharacterStats(0, 0, 0, 0, 0, null);
+      stats = new CharacterStats(0, 0, 0, 0, 0, null);
       
       //next screen button
       HBox submit = new HBox();
@@ -24,33 +37,28 @@ public class Main extends Application{
       Attribute points = new Attribute("Tokens:", null, 100);
       GridPane.setConstraints(points.getBox(), 0, 6);
       
-      //HBox submit = new HBox();
-      //submit.getChildren().addAll(points.getBox(), submitBtn);
-      //submitBtn.setAlignment(Pos.CENTER_RIGHT);
-      //GridPane.setConstraints(submit, 0, 7);
-      
       //name input
       Label name = new Label("what should we call you?");
-      TextField nameIn = new TextField();//lets users type an input
+      nameIn = new TextField();//lets users type an input
       nameIn.setPromptText("name");//default text (will be greyed out)
       HBox naming = new HBox(5);
       naming.getChildren().addAll(name, nameIn);
       GridPane.setConstraints(naming, 0, 0);
       
       //attributes
-      Attribute strength = new Attribute("strength", points.getParent(), 0);
+      strength = new Attribute("strength", points.getParent(), 0);
          GridPane.setConstraints(strength.getBox(), 0, 1);
-      Attribute cunning = new Attribute("cunning", points.getParent(), 0);
+      cunning = new Attribute("cunning", points.getParent(), 0);
          GridPane.setConstraints(cunning.getBox(), 0, 2);
-      Attribute luck = new Attribute("luck", points.getParent(), 0);
+      luck = new Attribute("luck", points.getParent(), 0);
          GridPane.setConstraints(luck.getBox(), 0, 3);
-      Attribute speed = new Attribute("speed", points.getParent(), 0);
+      speed = new Attribute("speed", points.getParent(), 0);
          GridPane.setConstraints(speed.getBox(), 0, 4);
-      Attribute memory = new Attribute("memory", points.getParent(), 0);
-         GridPane.setConstraints(memory.getBox(), 0, 5);
-            
+      memory = new Attribute("memory", points.getParent(), 0);
+         GridPane.setConstraints(memory.getBox(), 0, 5);  
+         
       //scrolable text output
-      TextArea text = new TextArea("welcome. select your character attributes. but be careful, as these cannot be changed later on.\n\n");
+      text = new TextArea("welcome. select your character attributes. but be careful, as these cannot be changed later on.\n\n");
       text.setEditable(false);
       text.setWrapText(true);
       GridPane.setConstraints(text, 0, 8);
@@ -67,11 +75,12 @@ public class Main extends Application{
       primaryStage.setResizable(false);
       primaryStage.setTitle("Title of Game");
       primaryStage.show();
-
+      
       //button actions
       submitBtn.setOnAction(e -> {
          if ((nameIn.getText() == null) || (nameIn.getText().isEmpty())){//no name
             PopUpWindow nameRemind = new PopUpWindow  ("even the bravest of adventurers needs a name", "continue");
+            return;
          }else if (points.getValue() != 0){//not all tokens used
             if (notSpent == 0){
                notSpent++;
@@ -86,20 +95,7 @@ public class Main extends Application{
                      PopUpWindow yesImSure = new PopUpWindow("FINE. you are awfully annoying by the way", "cash out");
                      stats.addMoney(points.getValue()/10);
                      text.appendText("+" + points.getValue() + " coins\n\n"); 
-                     if(strength.getValue() != 0){
-                        text.appendText("+" + strength.getValue() + " strength\n");//prints out to scrolable text area
-                     }if(cunning.getValue() != 0){
-                        text.appendText("+" + cunning.getValue() + " cunning\n");
-                     }if(luck.getValue() != 0){
-                        text.appendText("+" + luck.getValue() + " luck\n");
-                     }if(speed.getValue() != 0){
-                        text.appendText("+" + speed.getValue() + " speed\n");
-                     }if(memory.getValue() != 0){
-                        text.appendText("+" + memory.getValue() + " memory\n");
-                     }//----------------------------------------------------------------------------------------------------------------------------------------------// would like to have them appear one by one and THEN switch screens
-                     stats.newStats(strength.getValue(), cunning.getValue(), luck.getValue(), speed.getValue(), memory.getValue(), nameIn.getText());
-                     secondScene(stats, text);
-                     primaryStage.hide();
+                     showAttributesSwitchScreen(primaryStage);
                   }else if (tokensRemind2.getButton() == false){
                      notSpent++;
                      PopUpWindow noImNotSure = new PopUpWindow("please just hurry up. i want to go home", "continue");
@@ -110,21 +106,8 @@ public class Main extends Application{
             }
          }
        if ((nameIn != null) && (points.getValue() == 0)){//everything is filled out
-            if(strength.getValue() != 0){
-               text.appendText("+" + strength.getValue() + " strength\n");//prints out to scrolable text area
-            }if(cunning.getValue() != 0){
-               text.appendText("+" + cunning.getValue() + " cunning\n");
-            }if(luck.getValue() != 0){
-               text.appendText("+" + luck.getValue() + " luck\n");
-            }if(speed.getValue() != 0){
-               text.appendText("+" + speed.getValue() + " speed\n");
-            }if(memory.getValue() != 0){
-               text.appendText("+" + memory.getValue() + " memory\n");
-            }
-            stats.newStats(strength.getValue(), cunning.getValue(), luck.getValue(), speed.getValue(), memory.getValue(), nameIn.getText());
-            secondScene(stats, text);
-            primaryStage.hide();
-         }
+         showAttributesSwitchScreen(primaryStage);
+       }
       });
    }//main
    
@@ -149,14 +132,14 @@ public class Main extends Application{
       RadioButton hands = new RadioButton("nothing. i only need my bare hands");
          hands.setToggleGroup(buttons);
          GridPane.setConstraints(hands, 0, 4);
-      
+         
       //next screen
       VBox submit = new VBox();
       submit.setAlignment(Pos.CENTER_RIGHT);
       Button submitBtn = new Button("next");
       submit.getChildren().add(submitBtn);
          GridPane.setConstraints(submit, 0, 8);
-      
+         
       //grid setup
       GridPane layout = new GridPane();
       layout.setVgap(15);
@@ -209,9 +192,8 @@ public class Main extends Application{
    }//second screen
    
    
-   
    public void mainScreen(CharacterStats stats, TextArea text){
-      
+   
       //buttons
       Button explore = new Button("EXPLORE");
          GridPane.setConstraints(explore, 2, 3);
@@ -220,16 +202,16 @@ public class Main extends Application{
          statsBtn.setPrefSize(90, 15);
       Button items = new Button("items");
          items.setPrefSize(90, 15);
-      Button backpack = new Button("backpack");
-         backpack.setPrefSize(90, 15);
+      Button build = new Button("build");
+         build.setPrefSize(90, 15);
       
       //stack buttons
-      HBox btns1 = new HBox(30);
+      HBox btns1 = new HBox(20);
          GridPane.setConstraints(btns1, 2, 4);
-         btns1.getChildren().addAll(statsBtn, backpack);
-      HBox btns2 = new HBox();
+         btns1.getChildren().addAll(statsBtn, items);
+      HBox btns2 = new HBox(20);
          GridPane.setConstraints(btns2, 2, 5);
-         btns2.getChildren().addAll(items);
+         btns2.getChildren().addAll(build);
       
       //grid setup
       GridPane grid = new GridPane();
@@ -255,19 +237,23 @@ public class Main extends Application{
          mainStage.hide();
       });
       items.setOnAction(e -> {
-         //items(stats, text);
+         items();
          mainStage.hide();
       });
       
+   /* explore.setOnAction(e -> {
+         //map(stats, text);
+         mainStage.hide();
+      });
+      build.setOnAction(e -> {
+         //backpack(stats, text);
+         mainStage.hide();
+      });  */
       
-      //explore.setOnAction(e -> map());
-      //backpack.setOnAction(e -> backpack());
-         
    }//main screen
    
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  public void stat(CharacterStats stats, TextArea text){
+   
+   public void stat(CharacterStats stats, TextArea text){
       
       //grid setup
       GridPane grid = new GridPane();
@@ -323,21 +309,40 @@ public class Main extends Application{
       });
    }//stats
    
-   
-/*
+
    public void items(){
-   
-      ListView<String> list = new ListView<String>();
-      list.setPrefWidth(320);
-      list.setPrefHeight(420);
       
-      ObservableList<String> items = FXCollections.observableArrayList("wood");
-      ListView<String> listView = new ListView<String>(items);
+      //layout setup
+      BorderPane layout = new BorderPane();
       
+      GridPane grid = new GridPane();
+      grid.setPadding(new Insets(10, 10, 10, 10));
+      
+      Button back = new Button("<back");
+      Label label = new Label("items");
+      HBox box = new HBox(85);
+      box.getChildren().addAll(back, label);
+      grid.getChildren().add(box);
+      
+      layout.setTop(grid);
+      layout.setCenter(inventory.showList());
+      
+      //window setup
+      Scene scene = new Scene(layout, 320, 420);
+      Stage itemsStage = new Stage();
+      itemsStage.setResizable(false);
+      itemsStage.setScene(scene);
+      itemsStage.setTitle("Title of Game");
+      itemsStage.show();
+      
+      //button actions
+      back.setOnAction(e -> {
+         mainScreen(stats, text);
+         itemsStage.hide();
+      });
    }//items
-*/
-
-
+   
+   
 /*
    public void backpack(){
    }//backpack
@@ -346,5 +351,31 @@ public class Main extends Application{
    }//map
 */
 
+
+   private static void sleep(int ms){
+      try{
+       Thread.sleep(ms);
+      }catch(InterruptedException e){ }
+   }
+
+
+   private void showAttributesSwitchScreen(Stage primaryStage){
+      stats.newStats(strength.getValue(), cunning.getValue(), luck.getValue(), speed.getValue(), memory.getValue(), nameIn.getText());
+      secondScene(stats, text);
+      primaryStage.hide();
+      
+      if(strength.getValue() != 0){
+            //sleep(500);
+            text.appendText("+" + strength.getValue() + " strength\n");//prints out to scrolable text area
+      }if(cunning.getValue() != 0){
+            text.appendText("+" + cunning.getValue() + " cunning\n");
+      }if(luck.getValue() != 0){
+            text.appendText("+" + luck.getValue() + " luck\n");
+      }if(speed.getValue() != 0){
+            text.appendText("+" + speed.getValue() + " speed\n");
+      }if(memory.getValue() != 0){
+            text.appendText("+" + memory.getValue() + " memory\n");
+      } 
+   }
 
 }//class
