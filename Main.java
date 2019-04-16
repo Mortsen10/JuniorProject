@@ -31,7 +31,7 @@ public class Main extends Application{
       submit.setAlignment(Pos.CENTER_RIGHT);
       Button submitBtn = new Button("next");
       submit.getChildren().addAll(submitBtn);
-      GridPane.setConstraints(submit, 0, 7);
+      GridPane.setConstraints(submit, 0, 6);
       
       //distributable points
       Attribute points = new Attribute("Tokens:", null, 100);
@@ -43,7 +43,7 @@ public class Main extends Application{
       nameIn.setPromptText("name");//default text (will be greyed out)
       HBox naming = new HBox(5);
       naming.getChildren().addAll(name, nameIn);
-      GridPane.setConstraints(naming, 0, 0);
+      GridPane.setConstraints(naming, 0, 0, 2, 1);
       
       //attributes
       strength = new Attribute("strength", points.getParent(), 0);
@@ -61,7 +61,7 @@ public class Main extends Application{
       text = new TextArea("welcome. select your character attributes. but be careful, as these cannot be changed later on.\n\n");
       text.setEditable(false);
       text.setWrapText(true);
-      GridPane.setConstraints(text, 0, 8);
+      GridPane.setConstraints(text, 0, 7, 1, 3);
       
       //grid setup
       GridPane grid = new GridPane();
@@ -113,7 +113,7 @@ public class Main extends Application{
    
    
    public void secondScene(CharacterStats stats, TextArea text){
-      GridPane.setConstraints(text, 0, 9);
+      GridPane.setConstraints(text, 0, 13);
       
       //buttons
       final ToggleGroup buttons = new ToggleGroup();
@@ -138,7 +138,7 @@ public class Main extends Application{
       submit.setAlignment(Pos.CENTER_RIGHT);
       Button submitBtn = new Button("next");
       submit.getChildren().add(submitBtn);
-         GridPane.setConstraints(submit, 0, 8);
+         GridPane.setConstraints(submit, 0, 12);
          
       //grid setup
       GridPane layout = new GridPane();
@@ -193,10 +193,17 @@ public class Main extends Application{
    
    
    public void mainScreen(CharacterStats stats, TextArea text){
-   
+      
+      //top label
+      //HBox box = new HBox();
+      Label label = new Label("name of room");
+         //box.getChildren().add(label);
+         GridPane.setConstraints(label, 2, 0);
+         GridPane.setHalignment(label, HPos.CENTER);
+      
       //buttons
       Button explore = new Button("EXPLORE");
-         GridPane.setConstraints(explore, 2, 3);
+         GridPane.setConstraints(explore, 2, 1);
          explore.setPrefSize(210, 15);
       Button statsBtn = new Button("stats");
          statsBtn.setPrefSize(90, 15);
@@ -207,10 +214,10 @@ public class Main extends Application{
       
       //stack buttons
       HBox btns1 = new HBox(20);
-         GridPane.setConstraints(btns1, 2, 4);
+         GridPane.setConstraints(btns1, 2, 2);
          btns1.getChildren().addAll(statsBtn, items);
       HBox btns2 = new HBox(20);
-         GridPane.setConstraints(btns2, 2, 5);
+         GridPane.setConstraints(btns2, 2, 3);
          btns2.getChildren().addAll(build);
       
       //grid setup
@@ -218,10 +225,10 @@ public class Main extends Application{
       grid.setVgap(15);
       grid.setHgap(20);
       grid.setPadding(new Insets(10, 10, 10, 10));
-      grid.getChildren().addAll(explore, btns1, btns2);
+      grid.getChildren().addAll(label, explore, btns1, btns2);
       
       //text output
-      grid.add(text, 0, 14, 6, 8);
+      grid.add(text, 0, 13, 6, 8);
       
       //window setup
       Scene scene = new Scene(grid, 320, 420);
@@ -291,7 +298,7 @@ public class Main extends Application{
       GridPane.setConstraints(coins, 0, 11);
       
       //text output
-      grid.add(text, 0, 13, 2, 6);
+      //grid.add(text, 0, 13, 2, 6);
       
       //window setup
       grid.getChildren().addAll(top, name, strength.getBox(), cunning.getBox(), luck.getBox(), speed.getBox(), memory.getBox(), coins);
@@ -319,7 +326,7 @@ public class Main extends Application{
       grid.setPadding(new Insets(10, 10, 10, 10));
       
       Button back = new Button("<back");
-      Label label = new Label("items");
+      Label label = new Label("a small wooden box");
       HBox box = new HBox(85);
       box.getChildren().addAll(back, label);
       grid.getChildren().add(box);
