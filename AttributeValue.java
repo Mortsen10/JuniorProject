@@ -41,7 +41,6 @@ public class AttributeValue implements IntValue{
       return atrPtsLabel;
    }
    
-
    public int getValue(){
       return atrValue;
    }

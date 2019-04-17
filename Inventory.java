@@ -5,37 +5,39 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.geometry.*;
 import javafx.beans.property.*;
+import java.util.*;
 
 public class Inventory{
    
-   private ListView<String> inventory;
-   //private ArrayList<String> inventory = new ArrayList("nothing but dust...");
+   private ListView<String> list;
+   private ArrayList<ItemStack> inventory = new ArrayList<String>();
    
    public Inventory(){
-      inventory = new ListView<String>();
-         inventory.setPrefWidth(320);
-         inventory.setPrefHeight(420);
-         
-         //inventory.add("nothing but dust...");
+      list = new ListView<String>();
+         list.setPrefWidth(320);
+         list.setPrefHeight(420);
    }
+   
+   public ListView showList(){
+         //return inventory;
+         list.setItems(inventory);
+   }
+   
+   
+   
+   
+   
+   
    
    public void addItems(String string){
       //if (inventory == null){
-         
+         //Label that says "nothing but dust..."
       //}
       
-      inventory.getItems().add(string);
+      //inventory.getItems().add(string);
+      inventory.add(string);
    }
    
-
-   public ListView showList(){
-      
-      //if (inventory == null){
-         
-      //}else{
-         return inventory;
-      //}
-      
-   }
-   
+   public void dropItems(){
+   } 
 }
