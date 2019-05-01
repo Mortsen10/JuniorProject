@@ -19,7 +19,7 @@ public class Main extends Application{
    private CharacterStats stats;
    private TextField      nameIn;
    
-   Inventory inventory = new Inventory();
+   Inventory inventory = new Inventory();//inventory is not bound? it's not showing what i want
    
    
    @Override
@@ -205,6 +205,7 @@ public class Main extends Application{
       Button explore = new Button("EXPLORE");
          GridPane.setConstraints(explore, 2, 1);
          explore.setPrefSize(210, 15);
+         explore.setAlignment(Pos.CENTER);
       Button statsBtn = new Button("stats");
          statsBtn.setPrefSize(90, 15);
       Button items = new Button("items");
@@ -216,6 +217,7 @@ public class Main extends Application{
       HBox btns1 = new HBox(20);
          GridPane.setConstraints(btns1, 2, 2);
          btns1.getChildren().addAll(statsBtn, items);
+         btns1.setAlignment(Pos.CENTER);
       HBox btns2 = new HBox(20);
          GridPane.setConstraints(btns2, 2, 3);
          btns2.getChildren().addAll(build);
@@ -327,7 +329,7 @@ public class Main extends Application{
       
       Button back = new Button("<back");
       Label label = new Label("a small wooden box");
-      HBox box = new HBox(85);
+      HBox box = new HBox(55);
       box.getChildren().addAll(back, label);
       grid.getChildren().add(box);
       
@@ -357,15 +359,8 @@ public class Main extends Application{
    public void map(){
    }//map
 */
-
-
-   private static void sleep(int ms){
-      try{
-       Thread.sleep(ms);
-      }catch(InterruptedException e){ }
-   }
-
-
+   
+   
    private void showAttributesSwitchScreen(Stage primaryStage){
       stats.newStats(strength.getValue(), cunning.getValue(), luck.getValue(), speed.getValue(), memory.getValue(), nameIn.getText());
       secondScene(stats, text);
@@ -385,4 +380,10 @@ public class Main extends Application{
       } 
    }
 
+   /*
+   private static void sleep(int ms){
+      try{
+       Thread.sleep(ms);
+      }catch(InterruptedException e){ }
+   }*/
 }//class

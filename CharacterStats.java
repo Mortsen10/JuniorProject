@@ -3,10 +3,12 @@ import javafx.stage.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import java.util.*;
 
 public class CharacterStats{
    
-   public int[] stats = new int [5];
+   private int[]    stats    = new int[5];
+   private ArrayList<String> upgrades /*assigns an object a reference*/ = new ArrayList<String>();/*creates the object / new memory*/
    String item, name;
    int money;
    
@@ -57,9 +59,10 @@ public class CharacterStats{
    
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-   public void equipItem(){
+   public void equipItem(String itemName){
       
    }
+   
    public void dropItem(){
       
    }
