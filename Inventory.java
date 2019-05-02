@@ -18,14 +18,15 @@ public class Inventory{
       list = new ListView<ItemStack>();
          list.setPrefWidth(320);
          list.setPrefHeight(420);
-      inventory = FXCollections.observableArrayList();
+      inventory = FXCollections.observableArrayList();//implements ObservableList 'inventory' as an observableArrayList
+      
       inventory.add(dust);
+      list.setItems(inventory);
    }
    
    public ListView showList(){
       return list;
    }
-   
    
    public void addItem(ItemStack item, int n){
       if(inventory.get(0) == dust){//reasign the first position

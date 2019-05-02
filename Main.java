@@ -8,6 +8,7 @@ import javafx.beans.property.*;
 
 public class Main extends Application{
    int notSpent = 0;
+   String titleOfGame = "Title";
    
    private Attribute strength;
    private Attribute cunning;
@@ -34,7 +35,7 @@ public class Main extends Application{
       GridPane.setConstraints(submit, 0, 6);
       
       //distributable points
-      Attribute points = new Attribute("Tokens:", null, 100);
+      Attribute points = new Attribute("tokens:", null, 100);
       GridPane.setConstraints(points.getBox(), 0, 6);
       
       //name input
@@ -73,7 +74,7 @@ public class Main extends Application{
       Scene scene = new Scene(grid, 320, 420);
       primaryStage.setScene(scene);
       primaryStage.setResizable(false);
-      primaryStage.setTitle("Title of Game");
+      primaryStage.setTitle(titleOfGame);
       primaryStage.show();
       
       //button actions
@@ -114,6 +115,7 @@ public class Main extends Application{
    
    public void secondScene(CharacterStats stats, TextArea text){
       GridPane.setConstraints(text, 0, 13);
+      text.appendText("choose an item . . .\n\n");
       
       //buttons
       final ToggleGroup buttons = new ToggleGroup();
@@ -152,7 +154,7 @@ public class Main extends Application{
       Stage secondStage = new Stage();
       secondStage.setScene(scene);
       secondStage.setResizable(false);
-      secondStage.setTitle("Title of Game");
+      secondStage.setTitle(titleOfGame);
       secondStage.show();
       
       //button actions
@@ -195,9 +197,7 @@ public class Main extends Application{
    public void mainScreen(CharacterStats stats, TextArea text){
       
       //top label
-      //HBox box = new HBox();
-      Label label = new Label("name of room");
-         //box.getChildren().add(label);
+      Label label = new Label("a simple clearing");
          GridPane.setConstraints(label, 2, 0);
          GridPane.setHalignment(label, HPos.CENTER);
       
@@ -237,7 +237,7 @@ public class Main extends Application{
       Stage mainStage = new Stage();
       mainStage.setScene(scene);
       mainStage.setResizable(false);
-      mainStage.setTitle("Title of Game");
+      mainStage.setTitle(titleOfGame);
       mainStage.show();
       
       //button actions
@@ -308,7 +308,7 @@ public class Main extends Application{
       Stage statsStage = new Stage();
       statsStage.setResizable(false);
       statsStage.setScene(scene);
-      statsStage.setTitle("Title of Game");
+      statsStage.setTitle(titleOfGame);
       statsStage.show();
       
       //button actions
@@ -341,7 +341,7 @@ public class Main extends Application{
       Stage itemsStage = new Stage();
       itemsStage.setResizable(false);
       itemsStage.setScene(scene);
-      itemsStage.setTitle("Title of Game");
+      itemsStage.setTitle(titleOfGame);
       itemsStage.show();
       
       //button actions
@@ -357,6 +357,15 @@ public class Main extends Application{
    }//backpack
    
    public void map(){
+      
+      
+      //window setup
+      Scene scene = new Scene(layout, 320, 420);
+      Stage mapStage = new Stage();
+      mapStage.setResizable(false);
+      mapStage.setScene(scene);
+      mapStage.setTitle(titleOfGame);
+      mapStage.show();
    }//map
 */
    
@@ -379,6 +388,7 @@ public class Main extends Application{
             text.appendText("+" + memory.getValue() + " memory\n");
       } 
    }
+   
 
    /*
    private static void sleep(int ms){
