@@ -13,14 +13,14 @@
 //    |  v
 //   y  (pos)
 
-public ControllerExplore{
+public class ControllerExplore{
    // class constatant for the delta value of each movement
    public static final int DELTA = 2; //number of pixels
    
-   private final Model model; //will refresh
+   private final ModelExplore model; //will refresh
    
-   public ControllerExplore(Model model){
-      this.model = model;
+   public ControllerExplore(ModelExplore model){
+      this.model = new ModelExplore();
    }
    
    public boolean moveUp(){

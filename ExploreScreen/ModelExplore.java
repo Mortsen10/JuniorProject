@@ -11,7 +11,7 @@ public class ModelExplore{
    
    //constructor
    public ModelExplore(){
-      this.player = new Player;
+      this.player = new Player();
    }
    
    //getter

@@ -4,7 +4,7 @@ public class Player{
    private final BoundedPoint position; //initial position of the player
    
    public Player(){
-      this.position = new BoundedPoint();
+      this.position = new BoundedPoint(0, 0 , 600, 400);////////////////////////////// hopefully lets the point move to the edge of the stage
    }
    
    public boolean move(int dx, int dy){
@@ -13,5 +13,9 @@ public class Player{
    
    public Point getPosition(){
       return this.position.getPoint(); // ??
+   }
+   
+   public int getSize(){
+      return SIZE;
    }
 }

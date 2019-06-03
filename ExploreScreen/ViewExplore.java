@@ -17,22 +17,22 @@ public class ViewExplore{
    private static final int WIDTH = 600;
    private static final int HEIGHT = 400;
    
-   private final GraphicsContext graphics;
-   private final Model           model;       // ask for data 
-   private final Controller      controller;  // send commands
+   private final GraphicsContext   graphics;
+   private final ModelExplore      model;       // ask for data 
+   private final ControllerExplore controller;  // send commands
    
    // Instantiates the view by setting up all the UI elements and hooking up
    // the model and controller interactions
-   public ViewExplore(Stage stage, MyController controller, MyModel model){
+   public ViewExplore(Stage stage, ControllerExplore controller, ModelExplore model){
       Canvas canvas = new Canvas(WIDTH, HEIGHT);
       Group group = new Group();
       group.getChildren().add(canvas);
       
       Scene scene = new Scene(group, WIDTH, HEIGHT);
       
-      this.graphics = new getGraphicsContext2D();
-      this.model = model;
-      this.controller = controller;
+      this.graphics = canvas.getGraphicsContext2D();
+      this.model = new ModelExplore();
+      this.controller = new ControllerExplore(model);
       
       this.refresh(); //refresh at the beginning to show setup (otherwise would wait for a user click)
       

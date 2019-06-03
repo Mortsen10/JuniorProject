@@ -115,7 +115,7 @@ public class Main extends Application{
    
    public void secondScene(CharacterStats stats, TextArea text){
       GridPane.setConstraints(text, 0, 13);
-      text.appendText("choose an item . . .\n\n");
+      text.appendText("\nchoose an item . . .\n");
       
       //buttons
       final ToggleGroup buttons = new ToggleGroup();
@@ -250,14 +250,17 @@ public class Main extends Application{
          mainStage.hide();
       });
       
-   /* explore.setOnAction(e -> {
-         //map(stats, text);
+      explore.setOnAction(e -> {
+         explore();
          mainStage.hide();
       });
+      
+/*
       build.setOnAction(e -> {
          //backpack(stats, text);
          mainStage.hide();
-      });  */
+      });
+*/
       
    }//main screen
    
@@ -355,25 +358,22 @@ public class Main extends Application{
 /*
    public void backpack(){
    }//backpack
-   
-   public void map(){
-      
-      
-      //window setup
-      Scene scene = new Scene(layout, 320, 420);
-      Stage mapStage = new Stage();
-      mapStage.setResizable(false);
-      mapStage.setScene(scene);
-      mapStage.setTitle(titleOfGame);
-      mapStage.show();
-   }//map
 */
+
+   public void explore(){
+      Stage exploreStage = new Stage();
+      exploreStage.setTitle(titleOfGame);
+
+      ModelExplore model = new ModelExplore();
+      ControllerExplore controller = new ControllerExplore(model);
+      ViewExplore view = new ViewExplore(exploreStage, controller, model);
+      
+      exploreStage.show();
+   }
    
    
    private void showAttributesSwitchScreen(Stage primaryStage){
       stats.newStats(strength.getValue(), cunning.getValue(), luck.getValue(), speed.getValue(), memory.getValue(), nameIn.getText());
-      secondScene(stats, text);
-      primaryStage.hide();
       
       if(strength.getValue() != 0){
             //sleep(500);
@@ -386,7 +386,10 @@ public class Main extends Application{
             text.appendText("+" + speed.getValue() + " speed\n");
       }if(memory.getValue() != 0){
             text.appendText("+" + memory.getValue() + " memory\n");
-      } 
+      }
+      
+      secondScene(stats, text);
+      primaryStage.hide();
    }
    
 
