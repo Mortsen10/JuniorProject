@@ -36,10 +36,14 @@ public class ItemStack{
    }
    
    public String getName(){
-      return item;
+      return this.item;
    }
    
    public int getValue(){
       return value;
+   }
+   
+   public String toString(){
+      return this.item.toString();
    }
 }

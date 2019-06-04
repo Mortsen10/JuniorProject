@@ -20,7 +20,7 @@ public class Main extends Application{
    private CharacterStats stats;
    private TextField      nameIn;
    
-   Inventory inventory = new Inventory();//inventory is not bound? it's not showing what i want
+   Inventory inventory = new Inventory();
    
    
    @Override
@@ -255,13 +255,11 @@ public class Main extends Application{
          mainStage.hide();
       });
       
-/*
-      build.setOnAction(e -> {
+/*    build.setOnAction(e -> {
          //backpack(stats, text);
          mainStage.hide();
       });
 */
-      
    }//main screen
    
    
@@ -301,9 +299,6 @@ public class Main extends Application{
       HBox coins = new HBox(10);
       coins.getChildren().addAll(coin, coinValue);
       GridPane.setConstraints(coins, 0, 11);
-      
-      //text output
-      //grid.add(text, 0, 13, 2, 6);
       
       //window setup
       grid.getChildren().addAll(top, name, strength.getBox(), cunning.getBox(), luck.getBox(), speed.getBox(), memory.getBox(), coins);
@@ -354,11 +349,6 @@ public class Main extends Application{
       });
    }//items
    
-   
-/*
-   public void backpack(){
-   }//backpack
-*/
 
    public void explore(){
       Stage exploreStage = new Stage();
@@ -399,4 +389,5 @@ public class Main extends Application{
        Thread.sleep(ms);
       }catch(InterruptedException e){ }
    }*/
+   
 }//class
