@@ -1,2 +1,2 @@
 Hi!
-This is a school project for junior year, Programming 3
+This is a high school project from junior year, Programming 3
